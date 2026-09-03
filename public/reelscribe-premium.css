@@ -15,3 +15,43 @@ body.rs-ready .hero>* ,body.rs-ready section>*{animation:rs-in .65s both}.hero>*
 .rs-float{animation:rs-float 5s ease-in-out infinite}@keyframes rs-float{50%{transform:translateY(-8px)}}
 @media(max-width:760px){body:after{display:none}.wrap,.main,.page{width:min(100% - 32px,1180px)!important}.nav,.topbar{padding-left:16px!important;padding-right:16px!important}.hero{padding-top:32px!important}.hero-h1,h1{font-size:clamp(42px,12vw,72px)!important;line-height:.96!important}.stage{min-height:430px!important;transform:scale(.82);transform-origin:top center;margin-bottom:-70px}.fan{transform:scale(.88)}.plans,.steps,.qa-grid{grid-template-columns:1fr!important}.price,.plan{min-height:0}.stat-strip,.stats{grid-template-columns:1fr 1fr!important}.form-row{grid-template-columns:1fr!important}.navright .login,.navright .btn{display:none!important}.topbar-right{gap:6px!important}.table{overflow-x:auto}.modal-box{width:calc(100% - 28px)!important}.login-heading{font-size:40px!important}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* v3 consistency + mobile fixes */
+html,body{max-width:100%;overflow-x:hidden}
+body{font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,video,canvas,svg,iframe{max-width:100%}
+button,a,input,textarea,select{font:inherit}
+
+/* One header language across product pages */
+.nav,.topbar{min-height:72px!important}
+.nav-logo,.logo,.topbar-logo{letter-spacing:.04em!important}
+.nav-btn,.nav-back,.back{color:#a9abb6!important}
+.nav-btn.active{color:#fff!important}
+
+/* Prevent desktop nav controls from overflowing small phones */
+@media(max-width:760px){
+  .nav{min-height:64px!important;height:auto!important}
+  .nav-toggle{display:none!important}
+  .nav-right{display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important}
+  .nav-right .nav-badge{font-size:11px!important;padding:7px 11px!important}
+  .nav-right .btn,.nav-right .earn,.topbar-right .btn{display:none!important}
+  .nav-menu{display:flex!important;width:44px!important;height:44px!important;align-items:center!important;justify-content:center!important;flex:0 0 44px!important;font-size:24px!important}
+  .nav-logo,.logo,.topbar-logo{font-size:20px!important;white-space:nowrap!important}
+  .page,.wrap,.main,.content,.container{max-width:100%!important}
+  .page{width:calc(100% - 28px)!important}
+  .panel,.card,.price,.plan,.qa-card,.video-preview-card,.src-card,.channel,.step,.current-plan-banner,.transcript-panel,.tp-card,.share,.reward,.rules,.activity,.faqitem{border-radius:24px!important}
+  .caption-card{width:calc(50% - 6px)!important;min-width:0!important}
+  .usecase-grid,.plans-grid,.testi-grid{max-width:100%!important}
+  table{font-size:13px!important}
+  .table-wrap,.comparison,.table{max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+  .hero-input-wrap,.form-row{width:100%!important;max-width:100%!important}
+  .hero-input-wrap input,input,textarea,select{max-width:100%!important}
+}
+
+/* Stronger hierarchy so older page styles don't look washed out */
+.page h1,.page h2,.page h3,.main h1,.main h2,.main h3,.content h1,.content h2,.content h3{color:#f7f5f1!important}
+.page p,.main p,.content p,.page li,.main li,.content li{color:#aeb0ba}
+.page .muted,.main .muted,.content .muted,.page-sub,.hero-sub,.sub,.lede{color:#9295a2!important}
+
+/* Premium focus/hover without changing page behavior */
+button:not(:disabled),a,.tab-btn{cursor:pointer}
