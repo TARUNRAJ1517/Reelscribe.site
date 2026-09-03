@@ -67,3 +67,16 @@ button:not(:disabled),a,.tab-btn{cursor:pointer}
 .slate-top{background:rgba(255,255,255,.05)!important}
 .slate-top span,.slate-row .k{color:#b7b9c3!important}
 .slate-row .v{color:#f1f0ec!important}
+
+/* FIX: .popular ("MOST POPULAR" badge on the Pro pricing card) was caught
+   by the same generic soft-pink-pill rule used for .tag/.nav-badge/.trust-pill.
+   That transparent-pink-on-transparent-pink look disappears when it sits on
+   the Pro card's own glowing pink border. Give the badge its own solid,
+   opaque treatment so it reads clearly against the border. */
+.popular{
+  background:var(--rs-pink)!important;
+  border:none!important;
+  color:#08090c!important;
+  box-shadow:0 6px 18px rgba(255,61,110,.4)!important;
+  font-weight:800!important;
+}
