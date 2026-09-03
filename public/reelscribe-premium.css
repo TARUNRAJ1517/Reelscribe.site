@@ -56,27 +56,237 @@ button,a,input,textarea,select{font:inherit}
 /* Premium focus/hover without changing page behavior */
 button:not(:disabled),a,.tab-btn{cursor:pointer}
 
-/* FIX: .slate (document metadata card on terms/privacy/about) was getting
-   caught by the generic glass-card rule above, which set a near-invisible
-   background (5.5% white) combined with low-contrast --muted text.
-   Give it its own solid, readable treatment instead. */
-.slate{
-  background:linear-gradient(160deg,var(--rs-panel2),var(--rs-panel))!important;
-  border:1px solid var(--rs-line)!important;
-}
-.slate-top{background:rgba(255,255,255,.05)!important}
-.slate-top span,.slate-row .k{color:#b7b9c3!important}
-.slate-row .v{color:#f1f0ec!important}
+/* =========================================================
+   REELSCRIBE PREMIUM — V4 COMPATIBILITY PATCH
+   Keeps the premium look without overriding page-specific UI.
+   Fixes: clipped badges, pricing labels, Earn CTA colours,
+   mobile overflow, and oversized pricing controls.
+   ========================================================= */
 
-/* FIX: .popular ("MOST POPULAR" badge on the Pro pricing card) was caught
-   by the same generic soft-pink-pill rule used for .tag/.nav-badge/.trust-pill.
-   That transparent-pink-on-transparent-pink look disappears when it sits on
-   the Pro card's own glowing pink border. Give the badge its own solid,
-   opaque treatment so it reads clearly against the border. */
-.popular{
-  background:var(--rs-pink)!important;
-  border:none!important;
-  color:#08090c!important;
-  box-shadow:0 6px 18px rgba(255,61,110,.4)!important;
-  font-weight:800!important;
+/* Cards that intentionally contain badges positioned outside the card */
+.price,
+.plan {
+  overflow: visible !important;
 }
+
+/* Never let decorative card glows block or change badge layout */
+.price::after,
+.plan::after {
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+.price > *,
+.plan > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Homepage pricing badge ---------- */
+.price .popular {
+  position: absolute !important;
+  top: -12px !important;
+  right: 24px !important;
+  left: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-height: 0 !important;
+  padding: 5px 10px !important;
+  background: var(--rs-pink) !important;
+  color: #08090d !important;
+  border: 1px solid var(--rs-pink) !important;
+  border-radius: 999px !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  box-shadow: 0 8px 24px rgba(255,61,110,.20) !important;
+}
+
+/* ---------- Dedicated pricing-page badge ---------- */
+.pricing-page .pro-badge {
+  position: absolute !important;
+  top: -10px !important;
+  left: 20px !important;
+  right: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 4px 10px !important;
+  background: var(--red) !important;
+  color: #1a0a08 !important;
+  border: 1px solid var(--red) !important;
+  border-radius: 4px !important;
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-size: 9px !important;
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.2px !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  box-shadow: 0 8px 22px rgba(255,59,48,.18) !important;
+  z-index: 5 !important;
+}
+
+/* Annual savings label belongs to pricing and should stay green */
+.pricing-page .save-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-size: 10px !important;
+  line-height: 1.2 !important;
+  font-weight: 500 !important;
+  letter-spacing: .4px !important;
+  color: #6fcf97 !important;
+  background: rgba(111,207,151,.10) !important;
+  border: 1px solid rgba(111,207,151,.25) !important;
+  border-radius: 3px !important;
+  padding: 3px 8px !important;
+}
+
+/* ---------- Dashboard / clips / transcript referral CTA ---------- */
+.rs-referral-link {
+  background: #ff3b30 !important;
+  color: #fff !important;
+  border: 1px solid #ff3b30 !important;
+  border-radius: 7px !important;
+  box-shadow: 0 7px 18px rgba(255,59,48,.16) !important;
+  transform: none !important;
+}
+.rs-referral-link:hover {
+  background: #ff493f !important;
+  color: #fff !important;
+  border-color: #ff493f !important;
+  transform: translateY(-1px) !important;
+  filter: none !important;
+}
+
+/* Plan-status badge is NOT a generic pink marketing badge */
+.nav-badge {
+  background: transparent !important;
+  border: 1px solid var(--border2, rgba(255,255,255,.14)) !important;
+  color: var(--text-dim, #a4a4a8) !important;
+  border-radius: 4px !important;
+}
+.nav-badge.paid {
+  color: var(--accent, #ff3b30) !important;
+  border-color: var(--accent, #ff3b30) !important;
+  background: transparent !important;
+}
+
+/* ---------- Pricing page: preserve its compact card system ---------- */
+.pricing-page .plan {
+  border-radius: 12px !important;
+  box-shadow: 0 18px 45px rgba(0,0,0,.28) !important;
+  background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.012)) !important;
+}
+.pricing-page .plan.pro {
+  border-color: rgba(255,59,48,.52) !important;
+  background: linear-gradient(145deg, rgba(255,59,48,.075), rgba(255,255,255,.012)) !important;
+  box-shadow: 0 22px 55px rgba(255,59,48,.08) !important;
+}
+.pricing-page .plan:hover {
+  transform: translateY(-2px) !important;
+  border-color: var(--border2, rgba(255,255,255,.18)) !important;
+}
+.pricing-page .plan.pro:hover {
+  border-color: rgba(255,59,48,.68) !important;
+}
+.pricing-page .cta {
+  border-radius: 7px !important;
+}
+.pricing-page .cta-fill {
+  background: #ff3b30 !important;
+  color: #fff !important;
+  border-color: #ff3b30 !important;
+  box-shadow: 0 10px 24px rgba(255,59,48,.14) !important;
+}
+.pricing-page .cta-fill:hover {
+  background: #ff493f !important;
+}
+.pricing-page .cta-outline {
+  background: transparent !important;
+  color: var(--sub) !important;
+  border: 1px solid var(--border2) !important;
+  box-shadow: none !important;
+}
+
+/* ---------- Mobile: no horizontal clipping and tighter spacing ---------- */
+@media (max-width: 767px) {
+  .price,
+  .plan {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .price .popular {
+    top: -10px !important;
+    right: 16px !important;
+    font-size: 9px !important;
+    padding: 4px 9px !important;
+  }
+
+  .pricing-page .pro-badge {
+    top: -9px !important;
+    left: 18px !important;
+    font-size: 8px !important;
+    padding: 4px 9px !important;
+  }
+
+  .pricing-page .hero {
+    padding-top: 34px !important;
+    padding-bottom: 22px !important;
+  }
+  .pricing-page .hero h1 {
+    font-family: 'Archivo', -apple-system, sans-serif !important;
+    font-size: 30px !important;
+    line-height: 1.08 !important;
+    letter-spacing: -.8px !important;
+  }
+  .pricing-page .hero p {
+    font-size: 13px !important;
+  }
+  .pricing-page .toggle-row {
+    gap: 8px !important;
+    margin-bottom: 22px !important;
+  }
+  .pricing-page .wrap {
+    width: 100% !important;
+    max-width: 560px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+  .pricing-page .plan {
+    padding: 21px 18px 19px !important;
+  }
+  .pricing-page .plan-price-row {
+    gap: 5px !important;
+  }
+  .pricing-page .plan-amount {
+    font-family: 'Archivo', -apple-system, sans-serif !important;
+    font-size: 34px !important;
+    letter-spacing: -1px !important;
+  }
+  .pricing-page .feat-list {
+    margin-bottom: 17px !important;
+  }
+  .pricing-page .feat-list li {
+    padding: 4px 0 !important;
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .pricing-page .pro-badge {
+    left: 15px !important;
+  }
+  .pricing-page .save-tag {
+    display: none !important;
+  }
+}
+
