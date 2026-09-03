@@ -23,6 +23,7 @@ section{padding:95px 0}.kicker{font:600 12px 'IBM Plex Mono';color:var(--teal);t
 .transcript-panel{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:34px;border:1px solid var(--line);border-radius:20px;background:radial-gradient(circle at 80% 20%,rgba(63,216,192,.12),transparent 35%),linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:0 30px 80px #0006}.transcript-panel h3{font-size:28px;margin:8px 0}.transcript-panel p{color:var(--dim);line-height:1.6;max-width:680px}.tp-label{font:600 11px 'IBM Plex Mono';color:var(--teal);letter-spacing:1px}.tp-pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.tp-pills span{font-size:11px;color:#cbd0da;border:1px solid var(--line);padding:8px 10px;border-radius:20px;background:#ffffff04}.plans{grid-template-columns:repeat(3,1fr)}
 @media(max-width:900px){.hero{grid-template-columns:1fr}.stage{height:420px}.plans{grid-template-columns:1fr}.transcript-panel{align-items:flex-start;flex-direction:column}.links{display:none}.menu{display:block}.navright .login,.navright .btn{display:none}}
 </style>
+<link rel="stylesheet" href="/premium.css">
 </head>
 <body>
 <div class="gridbg"></div><div class="grain"></div>
@@ -48,4 +49,5 @@ document.querySelectorAll('.num').forEach(el=>{const target=+el.dataset.count,su
 function faq(btn){const item=btn.parentElement;document.querySelectorAll('.faq.open').forEach(x=>{if(x!==item)x.classList.remove('open')});item.classList.toggle('open')}
 document.getElementById('heroForm').addEventListener('submit',e=>{e.preventDefault();generateClips()});
 </script>
+<script src="/assets/js/premium.js"></script>
 </body></html>

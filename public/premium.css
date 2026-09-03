@@ -98,3 +98,187 @@ input:focus,textarea:focus,select:focus,.field-input:focus,.otp-input:focus{bord
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.rs-reveal{opacity:1;transform:none}}
 @media (max-width:699px){body::after{background-size:34px 34px}.hero::after{width:340px;height:340px;top:75px}.hero::before{height:340px}.panel:hover,.feat-card:hover,.plan:hover,.plan-card:hover,.free-card:hover,.channel:hover,.mockup-box:hover,.blog-card:hover,.faq-item:hover,.qa-card:hover,.log-card:hover,.cp-panel:hover,.cp-block:hover,.slate:hover,.card:hover{transform:translateY(-2px)}}
+
+/* =========================================================
+   ReelScribe Unified Studio UI — reference-style system
+   Applies to Dashboard / Transcript / Clips / Login / Pricing /
+   History / Referral / Support / Legal / Admin / Blog.
+   ========================================================= */
+:root{
+  --rs-pink:#ff3d6e;
+  --rs-pink2:#ff6b91;
+  --rs-gold:#ffc24b;
+  --rs-teal:#3fd8c0;
+  --rs-ink:#07080c;
+  --rs-surface:#101219;
+  --rs-surface2:#171923;
+}
+
+body{
+  color:#f5f4f1!important;
+  background:
+    radial-gradient(800px 480px at 82% 4%,rgba(255,61,110,.13),transparent 65%),
+    radial-gradient(700px 460px at 8% 35%,rgba(63,216,192,.055),transparent 65%),
+    radial-gradient(600px 400px at 55% 90%,rgba(255,194,75,.045),transparent 65%),
+    #07080c!important;
+}
+body::after{opacity:.32;background-size:38px 38px}
+
+/* Shared navigation */
+.nav,body>nav,nav.nav{
+  min-height:72px!important;
+  border-bottom:1px solid rgba(255,255,255,.08)!important;
+}
+.nav-logo{font-weight:800!important;letter-spacing:-.04em}
+.nav-logo .mark,.nav-logo .ndot,.nav-logo .dot{background:var(--rs-pink)!important}
+.nav-btn.active{color:#fff!important;background:rgba(255,61,110,.12)!important;border-color:rgba(255,61,110,.25)!important}
+.rs-referral-link{color:#f7d58a!important}
+.nav-menu{border:1px solid rgba(255,255,255,.1)!important;background:rgba(255,255,255,.025)!important;border-radius:16px!important}
+
+/* Shared page canvas */
+.reel,.wrap,.main.page,.main{width:min(1180px,calc(100% - 40px))!important;margin-left:auto!important;margin-right:auto!important}
+.reel{max-width:1180px!important}
+.reel-body{width:100%!important}
+.wrap{padding-top:54px!important;padding-bottom:70px!important}
+.main{padding-top:50px!important;padding-bottom:70px!important}
+
+/* Section labels */
+.frame-label,.section-label{
+  text-transform:uppercase;
+  font-family:"IBM Plex Mono",monospace!important;
+  font-size:11px!important;
+  color:#858b9a!important;
+  letter-spacing:.16em!important;
+}
+.frame-num{color:var(--rs-pink)!important}
+.frame-name{color:#a7adbd!important}
+
+/* Universal premium panels */
+.panel,.log-card,.qa-card,.free-card,.plan,.form-box,.slate,.channel,.card,.login-heading,.tabs,.mockup-box,.reward,.activity,.progress,.rules,.feat-card{
+  border:1px solid rgba(255,255,255,.09)!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018))!important;
+  box-shadow:0 28px 90px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.025)!important;
+  backdrop-filter:blur(18px)!important;
+}
+
+/* Forms */
+input,textarea,select,.field-input,.hero-input,.otp-input{
+  color:#fff!important;
+  background:rgba(255,255,255,.035)!important;
+  border-color:rgba(255,255,255,.1)!important;
+}
+input:focus,textarea:focus,select:focus,.field-input:focus,.hero-input:focus,.otp-input:focus{
+  border-color:rgba(255,61,110,.65)!important;
+  box-shadow:0 0 0 3px rgba(255,61,110,.09),0 15px 45px rgba(255,61,110,.08)!important;
+  outline:none!important;
+}
+button,.btn,.submit-btn,.form-submit,.cta,.cta-fill,.upgrade-btn{border-radius:12px!important}
+
+/* Dashboard / clips dashboard */
+body:has(.qa-grid) .reel,
+body:has(.clips-mockup) .reel{padding-top:20px}
+.qa-grid{gap:16px!important}
+.qa-card{min-height:170px!important;position:relative;overflow:hidden}
+.qa-card::before,.plan::before,.free-card::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(125deg,rgba(255,61,110,.08),transparent 28%,transparent 72%,rgba(63,216,192,.05));
+}
+.qa-card.featured{border-color:rgba(255,61,110,.32)!important;box-shadow:0 30px 90px rgba(255,61,110,.08),0 28px 90px rgba(0,0,0,.4)!important}
+.tc-title,.qa-title,.log-card-title{letter-spacing:-.03em!important}
+.upgrade-banner{border:1px solid rgba(255,194,75,.24)!important;background:linear-gradient(135deg,rgba(255,194,75,.09),rgba(255,61,110,.06))!important;box-shadow:0 25px 80px rgba(255,194,75,.06)!important}
+
+/* Transcript */
+.hero-sub,.page-sub,.feat-sub{color:#aeb3c0!important}
+.hero-input-wrap{border:1px solid rgba(255,255,255,.12)!important;background:rgba(255,255,255,.035)!important}
+.hero-input-btn,.submit-btn,.form-submit{background:linear-gradient(135deg,var(--rs-pink),#ff1f58)!important;color:#fff!important}
+.hero-upload{border-color:rgba(255,255,255,.12)!important;background:rgba(255,255,255,.025)!important}
+.mockup-box{overflow:hidden;position:relative}
+.mockup-box::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.06) 50%,transparent 65%);transform:translateX(-120%);animation:rsSweep 6s ease-in-out infinite;pointer-events:none}
+@keyframes rsSweep{0%,60%{transform:translateX(-120%)}80%,100%{transform:translateX(120%)}}
+
+/* Clips */
+.clips-mockup{border-radius:28px!important}
+.clip-thumb{border-radius:18px!important;overflow:hidden}
+.download-all-btn,.clip-login-btn{background:linear-gradient(135deg,var(--rs-pink),#ff1f58)!important;color:#fff!important}
+
+/* Pricing */
+.pricing-page,.pricing-wrap{position:relative;z-index:1}
+.plan{position:relative;overflow:hidden!important}
+.plan.pro{border-color:rgba(255,61,110,.4)!important;box-shadow:0 35px 100px rgba(255,61,110,.11),0 28px 90px rgba(0,0,0,.42)!important}
+.pro-badge,.rec-dot{background:var(--rs-pink)!important}
+.plan-amount,.plan-price,.price{color:#fff!important}
+.plan-amount::first-letter{color:#fff}
+.cta,.cta-fill,.plan button{background:linear-gradient(135deg,var(--rs-pink),#ff1f58)!important;color:#fff!important}
+.cta-outline{background:transparent!important;border-color:rgba(255,255,255,.15)!important}
+.save-tag{background:rgba(255,194,75,.12)!important;color:var(--rs-gold)!important;border-color:rgba(255,194,75,.25)!important}
+.current-plan-banner{border-color:rgba(63,216,192,.25)!important;background:rgba(63,216,192,.055)!important}
+
+/* Login */
+body:has(.tabs) .main{max-width:720px!important}
+.login-heading{border-radius:24px!important;padding:28px!important}
+.tab-btn.active{background:var(--rs-pink)!important;color:#fff!important}
+.google-btn{border-color:rgba(255,255,255,.12)!important;background:#fff!important;color:#111!important}
+
+/* History */
+.login-wall{border-color:rgba(255,61,110,.18)!important}
+.page-h1{letter-spacing:-.05em!important}
+
+/* Referral */
+.reward{border-color:rgba(255,194,75,.2)!important;background:linear-gradient(135deg,rgba(255,194,75,.09),rgba(255,61,110,.04))!important}
+.share.wa{background:rgba(63,216,192,.12)!important;border-color:rgba(63,216,192,.25)!important}
+.progress .fill{background:linear-gradient(90deg,var(--rs-pink),var(--rs-gold))!important}
+
+/* About / Contact / Privacy / Terms */
+.title-block{max-width:900px!important}
+.title-block h1,.title-block .title,.wrap>h1,.wrap h1{
+  letter-spacing:-.055em!important;
+  text-wrap:balance;
+}
+.title-block h1 em,.wrap h1 em{color:var(--rs-pink)!important}
+.slate{overflow:hidden!important;border-radius:22px!important}
+.slate-top{background:linear-gradient(90deg,rgba(255,61,110,.11),rgba(63,216,192,.04))!important}
+.slate-row{border-color:rgba(255,255,255,.07)!important}
+.slate-row .k{color:#737a8b!important}
+.slate-row .v{color:#f2f3f5!important}
+.spec,.clause,.channel{border-color:rgba(255,255,255,.08)!important}
+.spec-num,.clause-num{color:var(--rs-pink)!important}
+.channel-arrow{color:var(--rs-pink)!important}
+.form-box{border-radius:24px!important}
+
+/* Admin: premium dashboard without making controls confusing */
+body:has(#usageChart) .card,body:has(#usageChart) .panel{border-radius:18px!important}
+body:has(#usageChart) h1,body:has(#usageChart) h2{letter-spacing:-.04em!important}
+body:has(#usageChart) .btn{border:1px solid rgba(255,255,255,.1)!important;background:rgba(255,255,255,.035)!important}
+body:has(#usageChart) .btn-danger{background:rgba(255,61,110,.13)!important;border-color:rgba(255,61,110,.3)!important}
+
+/* Blog */
+.blog-card,article,.post,.blog-post{border-color:rgba(255,255,255,.08)!important}
+article{position:relative;z-index:1}
+
+/* Footer */
+footer,.closing{border-top-color:rgba(255,255,255,.08)!important}
+.foot-logo{color:#fff!important}
+.foot-tag{color:#707687!important}
+
+/* Mobile: same premium feel, better touch targets */
+@media(max-width:700px){
+  .reel,.wrap,.main.page,.main{width:calc(100% - 28px)!important}
+  .nav,body>nav,nav.nav{min-height:64px!important}
+  .nav-logo{font-size:21px!important}
+  .frame-label{margin-top:28px!important}
+  .stat-strip{grid-template-columns:repeat(2,1fr)!important}
+  .stat-cell.full{grid-column:1/-1!important}
+  .qa-grid{grid-template-columns:1fr!important}
+  .qa-card{min-height:145px!important}
+  .plans{grid-template-columns:1fr!important}
+  .plan,.free-card{transform:none!important}
+  .hero-h1,.page-h1{font-size:clamp(42px,13vw,66px)!important;line-height:.94!important}
+  .title-block h1,.wrap>h1{font-size:clamp(40px,12vw,62px)!important}
+  .hero-input-wrap{flex-wrap:wrap!important}
+  .hero-input-btn{width:100%!important;margin:8px!important}
+  .form-row{grid-template-columns:1fr!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
+}
