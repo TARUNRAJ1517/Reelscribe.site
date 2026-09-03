@@ -56,237 +56,256 @@ button,a,input,textarea,select{font:inherit}
 /* Premium focus/hover without changing page behavior */
 button:not(:disabled),a,.tab-btn{cursor:pointer}
 
+
 /* =========================================================
-   REELSCRIBE PREMIUM — V4 COMPATIBILITY PATCH
-   Keeps the premium look without overriding page-specific UI.
-   Fixes: clipped badges, pricing labels, Earn CTA colours,
-   mobile overflow, and oversized pricing controls.
+   TRANSCRIPT PAGE — PREMIUM V4 OVERRIDES
+   Scoped so the transcript tool does not inherit oversized
+   landing-page/card rules from the global premium theme.
    ========================================================= */
-
-/* Cards that intentionally contain badges positioned outside the card */
-.price,
-.plan {
-  overflow: visible !important;
+.transcript-page .nav{
+  min-height:64px!important;
+  height:64px!important;
+  padding:10px 18px!important;
+  gap:10px!important;
+}
+.transcript-page .nav-logo{
+  font-size:15px!important;
+  letter-spacing:.08em!important;
+}
+.transcript-page .nav-logo .mark{
+  width:7px!important;height:7px!important;
+}
+.transcript-page .nav-toggle{
+  max-width:190px!important;
+  border-radius:11px!important;
+  padding:3px!important;
+}
+.transcript-page .nav-btn{
+  font-size:10px!important;
+  padding:6px 8px!important;
+}
+.transcript-page .rs-referral-link{
+  background:linear-gradient(135deg,#ff3b30,#ff4d67)!important;
+  color:#fff!important;
+  border:0!important;
+  border-radius:10px!important;
+  padding:8px 11px!important;
+  font-size:11px!important;
+  box-shadow:0 7px 18px rgba(255,61,110,.16)!important;
+}
+.transcript-page .nav-menu{
+  width:38px!important;height:38px!important;
+  border-radius:11px!important;
+  font-size:22px!important;
 }
 
-/* Never let decorative card glows block or change badge layout */
-.price::after,
-.plan::after {
-  pointer-events: none !important;
-  z-index: 0 !important;
+.transcript-page .reel-body{
+  padding:0 24px!important;
+  max-width:1120px;
+  margin:0 auto;
 }
-.price > *,
-.plan > * {
-  position: relative;
-  z-index: 1;
+.transcript-page .hero{
+  padding-top:10px!important;
 }
+.transcript-page .frame-label{
+  padding:18px 0 9px!important;
+}
+.transcript-page .hero-h1{
+  max-width:760px!important;
+  font-size:clamp(42px,5vw,62px)!important;
+  line-height:.94!important;
+  margin:0 0 13px!important;
+}
+.transcript-page .hero-sub{
+  max-width:680px!important;
+  font-size:14px!important;
+  line-height:1.6!important;
+  margin-bottom:17px!important;
+}
+.transcript-page .hero-input-wrap{
+  max-width:760px!important;
+  min-height:52px!important;
+  margin-bottom:9px!important;
+  border-radius:14px!important;
+  background:rgba(255,255,255,.035)!important;
+}
+.transcript-page .hero-input{
+  min-width:0!important;
+  padding:12px 12px!important;
+  font-size:12px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.transcript-page .hero-input-btn{
+  min-width:142px!important;
+  padding:11px 15px!important;
+  border-radius:0!important;
+  background:linear-gradient(135deg,#ff2f68,#ff4d78)!important;
+  color:#08090d!important;
+  font-size:10.5px!important;
+}
+.transcript-page .hero-or{margin:8px 0!important;font-size:9px!important}
+.transcript-page .hero-upload{
+  max-width:760px!important;
+  min-height:48px!important;
+  padding:11px!important;
+  border-radius:13px!important;
+  background:rgba(255,255,255,.025)!important;
+  font-size:11.5px!important;
+}
+.transcript-page .trust-pills{
+  max-width:760px!important;
+  gap:6px!important;
+  margin-top:11px!important;
+}
+.transcript-page .trust-pill{
+  padding:5px 9px!important;
+  font-size:9.5px!important;
+  border-radius:999px!important;
+}
+.transcript-page .mockup-box{
+  max-width:760px!important;
+  margin-top:14px!important;
+  border-radius:17px!important;
+  box-shadow:0 18px 50px rgba(0,0,0,.24)!important;
+}
+.transcript-page .mockup-body{padding:13px 14px!important}
+.transcript-page .mockup-line{gap:9px!important;margin-bottom:9px!important}
+.transcript-page .mockup-text{font-size:11.5px!important;line-height:1.5!important}
 
-/* ---------- Homepage pricing badge ---------- */
-.price .popular {
-  position: absolute !important;
-  top: -12px !important;
-  right: 24px !important;
-  left: auto !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: auto !important;
-  min-height: 0 !important;
-  padding: 5px 10px !important;
-  background: var(--rs-pink) !important;
-  color: #08090d !important;
-  border: 1px solid var(--rs-pink) !important;
-  border-radius: 999px !important;
-  font-size: 10px !important;
-  line-height: 1.2 !important;
-  font-weight: 800 !important;
-  letter-spacing: .08em !important;
-  text-transform: uppercase !important;
-  white-space: nowrap !important;
-  box-shadow: 0 8px 24px rgba(255,61,110,.20) !important;
+/* Compact, consistently premium lower sections */
+.transcript-page .ticker-wrap{margin-top:18px!important;padding:8px 0!important}
+.transcript-page .ticker-item{font-size:8.5px!important}
+.transcript-page .stat-strip{
+  border-radius:16px!important;
+  overflow:hidden!important;
+  box-shadow:0 16px 40px rgba(0,0,0,.18)!important;
 }
+.transcript-page .stat-cell{padding:13px 8px!important}
+.transcript-page .stat-num{font-size:25px!important}
+.transcript-page .stat-label{font-size:8px!important}
+.transcript-page .feat-heading,
+.transcript-page .how-heading,
+.transcript-page .caption-heading{
+  font-size:clamp(27px,4vw,40px)!important;
+  line-height:1!important;
+  margin-bottom:8px!important;
+}
+.transcript-page .feat-sub,
+.transcript-page .how-sub{
+  font-size:12px!important;
+  line-height:1.55!important;
+  margin-bottom:13px!important;
+}
+.transcript-page .feat-cards{gap:12px!important}
+.transcript-page .feat-card{
+  padding:18px!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018))!important;
+}
+.transcript-page .feat-card h3{font-size:17px!important;margin-bottom:6px!important}
+.transcript-page .feat-card p{font-size:12px!important;line-height:1.6!important}
+.transcript-page .feat-stats{margin-top:13px!important}
+.transcript-page .step{
+  min-height:0!important;
+  padding:18px!important;
+  border-radius:17px!important;
+}
+.transcript-page .step h4{font-size:14px!important;margin:10px 0 5px!important}
+.transcript-page .step p{font-size:11.5px!important;line-height:1.55!important}
+.transcript-page .p-icon{border-radius:13px!important}
+.transcript-page .usecase-card{border-radius:16px!important;padding:14px!important}
+.transcript-page .testi-card{border-radius:17px!important;padding:17px!important}
+.transcript-page .compare-table{border-radius:16px!important;overflow:hidden!important}
+.transcript-page .compare-table th,
+.transcript-page .compare-table td{padding:10px 8px!important}
+.transcript-page .faq-item{border-radius:14px!important;overflow:hidden!important}
+.transcript-page .faq-q{padding:13px 14px!important;font-size:12px!important}
+.transcript-page .blog-card{border-radius:15px!important;padding:12px!important}
+.transcript-page .cta-section{border-radius:18px!important;padding:28px 18px!important}
+.transcript-page footer{padding-bottom:38px!important}
 
-/* ---------- Dedicated pricing-page badge ---------- */
-.pricing-page .pro-badge {
-  position: absolute !important;
-  top: -10px !important;
-  left: 20px !important;
-  right: auto !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 4px 10px !important;
-  background: var(--red) !important;
-  color: #1a0a08 !important;
-  border: 1px solid var(--red) !important;
-  border-radius: 4px !important;
-  font-family: 'IBM Plex Mono', monospace !important;
-  font-size: 9px !important;
-  line-height: 1.2 !important;
-  font-weight: 700 !important;
-  letter-spacing: 1.2px !important;
-  text-transform: uppercase !important;
-  white-space: nowrap !important;
-  box-shadow: 0 8px 22px rgba(255,59,48,.18) !important;
-  z-index: 5 !important;
-}
-
-/* Annual savings label belongs to pricing and should stay green */
-.pricing-page .save-tag {
-  display: inline-flex !important;
-  align-items: center !important;
-  white-space: nowrap !important;
-  font-family: 'IBM Plex Mono', monospace !important;
-  font-size: 10px !important;
-  line-height: 1.2 !important;
-  font-weight: 500 !important;
-  letter-spacing: .4px !important;
-  color: #6fcf97 !important;
-  background: rgba(111,207,151,.10) !important;
-  border: 1px solid rgba(111,207,151,.25) !important;
-  border-radius: 3px !important;
-  padding: 3px 8px !important;
-}
-
-/* ---------- Dashboard / clips / transcript referral CTA ---------- */
-.rs-referral-link {
-  background: #ff3b30 !important;
-  color: #fff !important;
-  border: 1px solid #ff3b30 !important;
-  border-radius: 7px !important;
-  box-shadow: 0 7px 18px rgba(255,59,48,.16) !important;
-  transform: none !important;
-}
-.rs-referral-link:hover {
-  background: #ff493f !important;
-  color: #fff !important;
-  border-color: #ff493f !important;
-  transform: translateY(-1px) !important;
-  filter: none !important;
-}
-
-/* Plan-status badge is NOT a generic pink marketing badge */
-.nav-badge {
-  background: transparent !important;
-  border: 1px solid var(--border2, rgba(255,255,255,.14)) !important;
-  color: var(--text-dim, #a4a4a8) !important;
-  border-radius: 4px !important;
-}
-.nav-badge.paid {
-  color: var(--accent, #ff3b30) !important;
-  border-color: var(--accent, #ff3b30) !important;
-  background: transparent !important;
-}
-
-/* ---------- Pricing page: preserve its compact card system ---------- */
-.pricing-page .plan {
-  border-radius: 12px !important;
-  box-shadow: 0 18px 45px rgba(0,0,0,.28) !important;
-  background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.012)) !important;
-}
-.pricing-page .plan.pro {
-  border-color: rgba(255,59,48,.52) !important;
-  background: linear-gradient(145deg, rgba(255,59,48,.075), rgba(255,255,255,.012)) !important;
-  box-shadow: 0 22px 55px rgba(255,59,48,.08) !important;
-}
-.pricing-page .plan:hover {
-  transform: translateY(-2px) !important;
-  border-color: var(--border2, rgba(255,255,255,.18)) !important;
-}
-.pricing-page .plan.pro:hover {
-  border-color: rgba(255,59,48,.68) !important;
-}
-.pricing-page .cta {
-  border-radius: 7px !important;
-}
-.pricing-page .cta-fill {
-  background: #ff3b30 !important;
-  color: #fff !important;
-  border-color: #ff3b30 !important;
-  box-shadow: 0 10px 24px rgba(255,59,48,.14) !important;
-}
-.pricing-page .cta-fill:hover {
-  background: #ff493f !important;
-}
-.pricing-page .cta-outline {
-  background: transparent !important;
-  color: var(--sub) !important;
-  border: 1px solid var(--border2) !important;
-  box-shadow: none !important;
-}
-
-/* ---------- Mobile: no horizontal clipping and tighter spacing ---------- */
-@media (max-width: 767px) {
-  .price,
-  .plan {
-    width: 100% !important;
-    max-width: 100% !important;
+@media(max-width:760px){
+  .transcript-page .nav{
+    min-height:58px!important;height:58px!important;
+    padding:8px 12px!important;
   }
-
-  .price .popular {
-    top: -10px !important;
-    right: 16px !important;
-    font-size: 9px !important;
-    padding: 4px 9px !important;
+  .transcript-page .nav-logo{font-size:14px!important;letter-spacing:.06em!important}
+  .transcript-page .nav-logo .mark{width:6px!important;height:6px!important}
+  .transcript-page .nav-toggle{display:none!important}
+  .transcript-page .rs-referral-link{
+    margin-left:auto!important;
+    padding:7px 10px!important;
+    border-radius:9px!important;
+    font-size:10.5px!important;
   }
-
-  .pricing-page .pro-badge {
-    top: -9px !important;
-    left: 18px !important;
-    font-size: 8px !important;
-    padding: 4px 9px !important;
+  .transcript-page .nav-menu{
+    width:38px!important;height:38px!important;
+    font-size:21px!important;
   }
-
-  .pricing-page .hero {
-    padding-top: 34px !important;
-    padding-bottom: 22px !important;
+  .transcript-page .reel-body{
+    width:100%!important;
+    padding:0 14px!important;
   }
-  .pricing-page .hero h1 {
-    font-family: 'Archivo', -apple-system, sans-serif !important;
-    font-size: 30px !important;
-    line-height: 1.08 !important;
-    letter-spacing: -.8px !important;
+  .transcript-page .frame-label{padding:15px 0 8px!important}
+  .transcript-page .frame-name{font-size:8.5px!important;letter-spacing:1px!important}
+  .transcript-page .hero{padding-top:4px!important}
+  .transcript-page .hero-h1{
+    max-width:none!important;
+    font-size:clamp(38px,11.5vw,50px)!important;
+    line-height:.92!important;
+    letter-spacing:-.035em!important;
+    margin-bottom:12px!important;
   }
-  .pricing-page .hero p {
-    font-size: 13px !important;
+  .transcript-page .hero-sub{
+    font-size:13px!important;
+    line-height:1.58!important;
+    margin-bottom:14px!important;
   }
-  .pricing-page .toggle-row {
-    gap: 8px !important;
-    margin-bottom: 22px !important;
+  .transcript-page .hero-input-wrap{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:0!important;
+    min-height:0!important;
+    overflow:hidden!important;
+    border-radius:13px!important;
   }
-  .pricing-page .wrap {
-    width: 100% !important;
-    max-width: 560px !important;
-    padding-left: 14px !important;
-    padding-right: 14px !important;
+  .transcript-page .hero-input{
+    width:100%!important;
+    height:48px!important;
+    padding:12px 13px!important;
+    font-size:12px!important;
   }
-  .pricing-page .plan {
-    padding: 21px 18px 19px !important;
+  .transcript-page .hero-input-btn{
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    padding:10px 12px!important;
+    border-top:1px solid rgba(255,255,255,.08)!important;
+    font-size:10.5px!important;
   }
-  .pricing-page .plan-price-row {
-    gap: 5px !important;
-  }
-  .pricing-page .plan-amount {
-    font-family: 'Archivo', -apple-system, sans-serif !important;
-    font-size: 34px !important;
-    letter-spacing: -1px !important;
-  }
-  .pricing-page .feat-list {
-    margin-bottom: 17px !important;
-  }
-  .pricing-page .feat-list li {
-    padding: 4px 0 !important;
-    font-size: 12px !important;
-    line-height: 1.35 !important;
-  }
+  .transcript-page .hero-or{margin:7px 0!important}
+  .transcript-page .hero-upload{min-height:46px!important;font-size:11px!important}
+  .transcript-page .trust-pills{margin-top:9px!important}
+  .transcript-page .trust-pill{font-size:9px!important;padding:5px 8px!important}
+  .transcript-page .mockup-box{margin-top:12px!important;border-radius:15px!important}
+  .transcript-page .mockup-bar{padding:8px 10px!important}
+  .transcript-page .mockup-body{padding:11px!important}
+  .transcript-page .mockup-line{gap:7px!important;margin-bottom:8px!important}
+  .transcript-page .mockup-time{width:34px!important;font-size:9px!important}
+  .transcript-page .mockup-text{font-size:10.5px!important}
+  .transcript-page .stat-strip{border-radius:14px!important}
+  .transcript-page .stat-cell{padding:11px 5px!important}
+  .transcript-page .stat-num{font-size:20px!important}
+  .transcript-page .stat-label{font-size:7px!important;letter-spacing:.3px!important}
+  .transcript-page .feat-card{padding:15px!important;border-radius:16px!important}
+  .transcript-page .feat-card h3{font-size:15px!important}
+  .transcript-page .feat-card p{font-size:11px!important}
+  .transcript-page .step{padding:15px!important}
+  .transcript-page .usecase-card{flex-basis:145px!important}
+  .transcript-page .compare-table{font-size:10px!important}
+  .transcript-page .compare-table th,.transcript-page .compare-table td{padding:9px 7px!important}
+  .transcript-page .cta-section{padding:24px 15px!important}
 }
-
-@media (max-width: 380px) {
-  .pricing-page .pro-badge {
-    left: 15px !important;
-  }
-  .pricing-page .save-tag {
-    display: none !important;
-  }
-}
-
