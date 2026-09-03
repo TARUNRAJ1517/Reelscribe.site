@@ -45,6 +45,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/assets/css/index.css">
+<link rel="stylesheet" href="/premium.css">
 </head>
 <body>
 <!-- NAV -->
@@ -78,32 +79,10 @@
 
 <div class="reel">
   <div class="reel-body">
-<div class="hero hero-saas">
-    <div class="hero-orbit orbit-a"></div><div class="hero-orbit orbit-b"></div>
-    <div class="hero-noise"></div>
-    <div class="hero-badge"><span class="pulse-dot"></span> AI clipping engine · now live</div>
+<div class="hero">
     <div class="frame-label"><span class="frame-num">—</span><span class="frame-name">AI Powered · Login Required</span><span class="frame-line"></span></div>
     <h1 class="hero-h1">Turn long videos into <em>viral clips.</em></h1>
     <p class="hero-sub">Paste any YouTube link. AI scans the transcript, finds the <strong>best viral moments</strong>, and cuts 5–12 ready-to-post reels — automatically.</p>
-
-    <div class="hero-proof-row"><span>⚡ 10× faster repurposing</span><span>✦ Creator-ready output</span><span>✓ No editing skills</span></div>
-    <div class="hero-product-stage" aria-hidden="true">
-      <div class="stage-glow"></div>
-      <div class="stage-window">
-        <div class="stage-top"><span class="stage-dot"></span><span class="stage-dot"></span><span class="stage-dot"></span><span class="stage-url">reelscribe / studio</span><span class="stage-status">● AI ACTIVE</span></div>
-        <div class="stage-content">
-          <div class="stage-sidebar"><span class="side-active">✦</span><span>▣</span><span>◫</span><span>⌁</span></div>
-          <div class="stage-main">
-            <div class="stage-heading"><span>Processing your video</span><b>87%</b></div>
-            <div class="progress"><i></i></div>
-            <div class="signal-grid"><div class="signal-card"><small>VIRAL SCORE</small><strong>94</strong><em>↑ 18%</em></div><div class="signal-card"><small>HOOKS FOUND</small><strong>12</strong><em>High intent</em></div><div class="signal-card"><small>CLIPS READY</small><strong>08</strong><em>9:16 vertical</em></div></div>
-            <div class="wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-          </div>
-        </div>
-      </div>
-      <div class="floating-card fc-one"><span>✦</span><b>Best moment found</b><small>00:42 — “Here’s the secret…”</small></div>
-      <div class="floating-card fc-two"><span>✓</span><b>Caption style applied</b><small>Bold Pop · 9:16</small></div>
-    </div>
 
     <div class="hero-input-wrap">
       <svg style="width:15px;height:15px;color:var(--muted);margin:auto 0 auto 14px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
@@ -116,15 +95,6 @@
       <span class="trust-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>5–12 clips per video</span>
       <span class="trust-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Auto deleted after 24h</span>
       <span class="trust-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Download then 5min delete</span>
-    </div>
-
-    <div class="dashboard-preview" aria-hidden="true">
-      <div class="dash-top"><span class="dash-title">AI Clip Studio</span><span class="dash-status"><i></i> Processing complete</span></div>
-      <div class="dash-grid">
-        <div class="dash-video"><div class="video-shine"></div><span class="play-ring">▶</span><div class="timeline"><i></i></div></div>
-        <div class="dash-side"><div class="dash-mini"><span>Viral Score</span><strong>94</strong><em>+18%</em></div><div class="dash-mini"><span>Best Moment</span><strong>02:41</strong><em>Hook detected</em></div><div class="dash-mini"><span>Captions</span><strong>Auto</strong><em>Bold Pop</em></div></div>
-      </div>
-      <div class="dash-clips"><span>8 clips generated</span><i></i><i></i><i></i><i></i><i></i></div>
     </div>
 
     <div class="demo-video-box">
@@ -340,5 +310,6 @@
   <button onclick="document.getElementById('clipUrl') ? document.getElementById('clipUrl').focus() : null; window.scrollTo({top:0,behavior:'smooth'})">Try Free</button>
 </div>
 <script src="/assets/js/index.js" defer></script>
+<script src="/assets/js/premium.js" defer></script>
 </body>
 </html>
