@@ -55,3 +55,15 @@ button,a,input,textarea,select{font:inherit}
 
 /* Premium focus/hover without changing page behavior */
 button:not(:disabled),a,.tab-btn{cursor:pointer}
+
+/* FIX: .slate (document metadata card on terms/privacy/about) was getting
+   caught by the generic glass-card rule above, which set a near-invisible
+   background (5.5% white) combined with low-contrast --muted text.
+   Give it its own solid, readable treatment instead. */
+.slate{
+  background:linear-gradient(160deg,var(--rs-panel2),var(--rs-panel))!important;
+  border:1px solid var(--rs-line)!important;
+}
+.slate-top{background:rgba(255,255,255,.05)!important}
+.slate-top span,.slate-row .k{color:#b7b9c3!important}
+.slate-row .v{color:#f1f0ec!important}
