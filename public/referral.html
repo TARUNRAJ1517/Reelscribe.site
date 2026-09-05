@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="/reelscribe.css">
 </head>
 <body>
-<nav class="nav"><div class="page" style="display:flex;justify-content:space-between;align-items:center"><a class="logo" href="/"><i></i>ReelScribe</a><a class="back" href="/dashboard.html">← Dashboard</a></div></nav>
+<nav class="nav"><div class="page rs-ref-nav"><a class="logo" href="/"><i></i>ReelScribe</a><div class="rs-ref-nav-actions"><a class="back" href="/dashboard.html">← Dashboard</a><button class="nav-menu" type="button" onclick="document.getElementById('refMenu').classList.toggle('open')" aria-label="Open menu">≡</button></div></div></nav>
+<div class="ref-menu" id="refMenu"><div class="ref-menu-box"><button type="button" onclick="document.getElementById('refMenu').classList.remove('open')">×</button><a href="/">Home</a><a href="/transcript.html">Transcript</a><a href="/clips-dashboard.html">Cut Clips</a><a href="/dashboard.html">Transcription Dashboard</a><a href="/pricing.html">Pricing</a><a href="/contact.html">Support</a><a href="/referral.html">Invite &amp; Earn</a></div></div>
 <main class="main page">
 <div class="reward"><div class="gift">✦</div><div><strong>Invite 1 friend → Get <em style="color:var(--accent);font-style:normal">1 free clip</em></strong><span>No purchase needed. Credit is unlocked after their first transcript.</span></div></div>
 <div class="label"><b>—</b> Invite & Earn</div>
