@@ -11,7 +11,7 @@
   // One navigation system across the entire public app.
   const path = location.pathname;
   const isApp = /dashboard|clips-dashboard/.test(path);
-  const nav = document.querySelector('.rs-unified-nav') || document.querySelector('.nav') || document.querySelector('body > nav');
+  const nav = document.querySelector('.rs-unified-nav') || document.querySelector('header > nav') || document.querySelector('.nav') || document.querySelector('body > nav');
   if(nav && !nav.dataset.rsUnified){
     nav.dataset.rsUnified='1';
     nav.className='rs-unified-nav';
