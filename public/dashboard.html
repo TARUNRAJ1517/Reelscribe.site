@@ -62,6 +62,28 @@
   </div>
 </nav>
 
+<!-- PREMIUM 3D DASHBOARD HERO -->
+<section class="rs3d-hero">
+  <canvas id="rs3dCanvas" aria-hidden="true"></canvas>
+  <div class="rs3d-grid"></div>
+  <div class="rs3d-scan"></div>
+  <div class="rs3d-tag rs3d-tag-a"><span></span> AI SIGNAL<strong>Finding high-retention moments</strong></div>
+  <div class="rs3d-tag rs3d-tag-b">AUTO CAPTIONS</div>
+  <div class="rs3d-tag rs3d-tag-c">92% CLIP SCORE</div>
+  <div class="rs3d-tag rs3d-tag-d">9:16 READY</div>
+  <div class="rs3d-center-copy">
+    <div class="rs3d-kicker">AI CLIP STUDIO</div>
+    <h2>Your next batch of clips starts here.</h2>
+    <p>Upload once. Let ReelScribe find the moments worth publishing.</p>
+    <a class="rs3d-action" href="/clips-dashboard.html">Create clips <b>→</b></a>
+  </div>
+  <div class="rs3d-hud">
+    <div><small>ENGINE</small><strong>READY</strong></div>
+    <div><small>ANALYSIS</small><strong>LIVE</strong></div>
+    <div><small>QUALITY</small><strong>92%</strong></div>
+  </div>
+</section>
+
 <div class="reel">
   <div class="reel-body">
 
@@ -163,6 +185,29 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+<script>
+(function(){
+ const canvas=document.getElementById('rs3dCanvas'); if(!canvas||typeof THREE==='undefined') return;
+ const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+ renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+ const scene=new THREE.Scene();
+ const camera=new THREE.PerspectiveCamera(42,1,.1,100); camera.position.z=7;
+ const group=new THREE.Group(); scene.add(group);
+ scene.add(new THREE.AmbientLight(0xc9ead5,1.15));
+ const a=new THREE.PointLight(0xa5dfbb,18,10); a.position.set(2.7,2.1,3); scene.add(a);
+ const b=new THREE.PointLight(0x4f9e73,12,9); b.position.set(-3,-1.4,2); scene.add(b);
+ const material=new THREE.MeshPhysicalMaterial({color:0x79c396,metalness:.5,roughness:.2,clearcoat:1,clearcoatRoughness:.1});
+ const knot=new THREE.Mesh(new THREE.TorusKnotGeometry(1.35,.39,220,32,2,3),material); group.add(knot);
+ const shell=new THREE.Mesh(new THREE.IcosahedronGeometry(2.3,2),new THREE.MeshBasicMaterial({color:0x9cddb6,wireframe:true,transparent:true,opacity:.12}));group.add(shell);
+ const core=new THREE.Mesh(new THREE.SphereGeometry(1.18,56,56),new THREE.MeshPhysicalMaterial({color:0x173525,emissive:0x112619,emissiveIntensity:1.35,roughness:.28,clearcoat:1}));group.add(core);
+ const pts=[]; for(let i=0;i<260;i++){let r=2.7+Math.random()*1.6,a=Math.random()*Math.PI*2,z=(Math.random()-.5)*2;pts.push(r*Math.cos(a),r*Math.sin(a),z)}
+ const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));group.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x9bdab4,size:.018,transparent:true,opacity:.45})));
+ let mx=0,my=0,tx=0,ty=0; addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+ function resize(){const r=canvas.getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix()} resize();addEventListener('resize',resize);
+ const clock=new THREE.Clock(); function tick(){requestAnimationFrame(tick);let t=clock.getElapsedTime();tx+=(mx*.45-tx)*.035;ty+=(my*.3-ty)*.035;group.rotation.y=t*.12+tx*.5;group.rotation.x=Math.sin(t*.4)*.05+ty;knot.rotation.z=t*.18;shell.rotation.y=-t*.05;a.position.x=2.7+Math.sin(t)*.6;a.position.y=2.1+Math.cos(t*.8)*.4;renderer.render(scene,camera)} tick();
+})();
+</script>
 <script src="/assets/js/dashboard.js" defer></script>
   <script src="/assets/js/reelscribe-premium.js"></script>
 </body>
