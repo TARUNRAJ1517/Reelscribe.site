@@ -1,0 +1,279 @@
+/* =========================================================
+   REELSCRIBE — UNIFIED DESIGN SYSTEM
+   Final theme layer. Page CSS owns layout/functionality;
+   this file owns the shared visual language across all pages.
+   Canonical palette is taken from the current Home screen.
+   ========================================================= */
+
+:root {
+  --rs-bg: #07080c;
+  --rs-panel: #0e1017;
+  --rs-panel-2: #151822;
+  --rs-line: rgba(255,255,255,.09);
+  --rs-line-strong: rgba(255,255,255,.14);
+  --rs-text: #f6f3ee;
+  --rs-dim: #9699a6;
+  --rs-muted: #6e7280;
+  --rs-pink: #ff3d6e;
+  --rs-pink-strong: #ff2f68;
+  --rs-pink-soft: #ff5a84;
+  --rs-gold: #ffc24b;
+  --rs-teal: #3fd8c0;
+  --rs-green: #6fe6a3;
+  --rs-shadow: 0 24px 70px rgba(0,0,0,.42);
+
+  /* Legacy token aliases — lets older page CSS inherit the Home palette. */
+  --bg: var(--rs-bg);
+  --s1: var(--rs-panel);
+  --s2: var(--rs-panel-2);
+  --border: rgba(255,255,255,.09);
+  --border2: rgba(255,255,255,.14);
+  --accent: var(--rs-pink);
+  --accent-dim: rgba(255,61,110,.10);
+  --red: var(--rs-pink);
+  --red-dim: rgba(255,61,110,.22);
+  --text: var(--rs-text);
+  --sub: var(--rs-dim);
+  --muted: var(--rs-muted);
+}
+
+html { background: var(--rs-bg) !important; }
+body {
+  background:
+    radial-gradient(900px 520px at 85% 5%, rgba(255,61,110,.10), transparent 65%),
+    radial-gradient(800px 520px at 10% 55%, rgba(63,216,192,.06), transparent 65%),
+    var(--rs-bg) !important;
+  color: var(--rs-text) !important;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+body::before {
+  opacity: .18;
+  background-image:
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px) !important;
+  background-size: 56px 56px !important;
+  pointer-events: none;
+}
+
+/* Shared typography */
+h1, h2, h3, h4, h5, h6,
+.hero-h1, .login-h1, .page-h1, .page h1, .main h1, .content h1 {
+  color: #f7f5f1 !important;
+}
+
+.eyebrow, .kicker, .section-label, .frame-label, .frame-num,
+.stat-label, .cp-label, .fnum { color: var(--rs-gold) !important; }
+
+.hero-sub, .sub, .lede, .page-sub, .login-sub,
+.page p, .main p, .content p,
+.page li, .main li, .content li,
+.muted { color: #a8aab5 !important; }
+
+.mono, .eyebrow, .kicker, .section-label, .frame-label, .frame-num,
+.stat-label, .cp-label, .fnum, code, pre {
+  font-family: "IBM Plex Mono", monospace !important;
+}
+
+/* Shared navigation */
+nav, .nav, .topbar {
+  background: rgba(7,8,12,.82) !important;
+  border-color: var(--rs-line) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 12px 35px rgba(0,0,0,.18) !important;
+}
+
+.nav-logo, .logo, .topbar-logo {
+  color: #fff !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-weight: 800 !important;
+}
+
+.nav-logo .mark, .logo .dot, .logo > i, .lock-logo .ndot, .ndot {
+  background: var(--rs-pink) !important;
+  box-shadow: 0 0 18px rgba(255,61,110,.75) !important;
+}
+
+.nav-back, .nav-btn, .back, .nav-link, .links a {
+  color: #9699a6 !important;
+}
+.nav-back:hover, .nav-btn:hover, .nav-btn.active, .back:hover, .nav-link:hover, .links a:hover {
+  color: #fff !important;
+}
+
+.nav-toggle, .nav-menu, .menu, .topbar-menu, .menu-close {
+  background: rgba(255,255,255,.045) !important;
+  border-color: var(--rs-line) !important;
+  color: #fff !important;
+}
+
+/* Shared surfaces */
+.panel, .card, .price, .plan, .free-card, .slate, .form-box,
+.channel, .qa-card, .video-preview-card, .src-card, .reel,
+.mockup-box, .lock-card, .detail-box, .modal-box, .current-plan-banner,
+.transcript-panel, .tp-card, .share, .reward, .rules, .activity,
+.faqitem, .faq, .section, .dash, .stat-strip, .stats, .step,
+.result-card, .history-card, .history-item, .admin-card, .stat-card,
+.user-card, .table-card, .info-card, .note, .box {
+  background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018)) !important;
+  border: 1px solid var(--rs-line) !important;
+  box-shadow: var(--rs-shadow) !important;
+  border-radius: 22px !important;
+  color: var(--rs-text) !important;
+}
+
+/* Keep table/card internals readable without changing structure. */
+.table, table, .comparison, .compare, .clause-list, .spec-list {
+  border-color: var(--rs-line) !important;
+}
+table th, table td, .table th, .table td,
+.clause, .slate-row, .spec, .spec-row {
+  border-color: var(--rs-line) !important;
+}
+
+.v, .spec-body, .clause-body, .slate-body,
+.plan-rate, .plan-cycle, .free-card-info span,
+.bottom-text, .legal-note, .subtitle, .detail-sub, .dl {
+  color: #9da0ab !important;
+}
+
+/* Fields */
+input, textarea, select,
+.hero-input, .hero-input-wrap input, .field-input, .otp-input,
+.form-control, .search-input, .admin-input {
+  background: rgba(255,255,255,.045) !important;
+  border: 1px solid var(--rs-line) !important;
+  color: #fff !important;
+  border-radius: 14px !important;
+  outline: none !important;
+}
+
+input::placeholder, textarea::placeholder, .hero-input::placeholder {
+  color: #6e7280 !important;
+}
+input:focus, textarea:focus, select:focus,
+.hero-input:focus, .hero-input-wrap input:focus,
+.field-input:focus, .otp-input:focus,
+.form-control:focus, .search-input:focus, .admin-input:focus {
+  border-color: rgba(255,61,110,.55) !important;
+  box-shadow: 0 0 0 4px rgba(255,61,110,.08), 0 0 30px rgba(255,61,110,.08) !important;
+}
+
+/* Buttons */
+button, .btn, .cta, .form-submit, .submit-btn, .hero-input-btn,
+.login-wall-btn, .upgrade-btn, .drawer-upgrade, .drawer-upgrade-chip,
+.dash-btn, .btn-new, .btn-copy, .google-btn, .otp-send-btn,
+.support-btn, .clip-login-btn, .menu-cta {
+  border-radius: 14px !important;
+  font-weight: 800 !important;
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease, border-color .2s ease !important;
+}
+
+.btn.pink, .cta-fill, .form-submit, .submit-btn, .hero-input-btn,
+.login-wall-btn, .upgrade-btn, .drawer-upgrade, .drawer-upgrade-chip,
+.dash-btn, .menu-cta, .pro-badge {
+  background: linear-gradient(135deg, var(--rs-pink-strong), var(--rs-pink-soft)) !important;
+  color: #08090d !important;
+  border-color: rgba(255,255,255,.10) !important;
+  box-shadow: 0 12px 30px rgba(255,61,110,.18) !important;
+}
+
+.btn.white, .cta-outline, .google-btn, .btn-copy, .btn-new, .support-btn,
+.btn-ghost, .nav-btn:not(.active) {
+  background: rgba(255,255,255,.045) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+}
+
+button:not(:disabled):hover, .btn:hover, .cta:hover, .form-submit:hover,
+.submit-btn:hover, .hero-input-btn:hover, .login-wall-btn:hover,
+.upgrade-btn:hover, .drawer-upgrade:hover, .drawer-upgrade-chip:hover,
+.dash-btn:hover, .btn-new:hover, .btn-copy:hover, .google-btn:hover,
+.otp-send-btn:hover, .support-btn:hover, .clip-login-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow: 0 16px 36px rgba(0,0,0,.28) !important;
+}
+
+/* Badges / accents */
+.tag, .nav-badge, .trust-pill, .ref-credit-banner, .popular,
+.pro-badge, .save-tag, .status-pill, .badge, .tag-current {
+  border-radius: 999px !important;
+}
+.popular, .pro-badge, .tag, .nav-badge {
+  background: rgba(255,61,110,.12) !important;
+  border-color: rgba(255,61,110,.28) !important;
+  color: #ff9ab5 !important;
+}
+.tag.b, .trust-pill.success, .trust-pill.teal {
+  background: rgba(63,216,192,.08) !important;
+  border-color: rgba(63,216,192,.25) !important;
+  color: var(--rs-teal) !important;
+}
+
+.progress, .fill, .bar i, .frame-line i, .src-meter i {
+  background: linear-gradient(90deg, var(--rs-pink), var(--rs-gold)) !important;
+}
+
+.accent, .hero-h1 em, .hero h1 em, .frame-num, .clause-num, .spec-num,
+.blog-tag, .mockup-time, .clip-dur + .clip-cap {
+  color: var(--rs-pink) !important;
+}
+
+/* Links */
+a { color: inherit; }
+a:hover { color: #fff; }
+
+/* Drawers / modal overlays */
+.drawer, .menu-box, .modal-box, .detail-box, .modal,
+.admin-modal, .popup, .dropdown-menu {
+  background: linear-gradient(145deg, #11141c, #0b0d13) !important;
+  border-color: var(--rs-line) !important;
+  box-shadow: 0 28px 80px rgba(0,0,0,.55) !important;
+}
+.drawer-link:hover, .menu-box a:hover { background: rgba(255,255,255,.06) !important; }
+
+/* Footer */
+footer, .closing {
+  border-color: var(--rs-line) !important;
+}
+.foot-logo, .foot-copy, .foot-tag, .foot-links,
+footer p, footer a { color: #858995 !important; }
+.foot-links a:hover, footer a:hover { color: #fff !important; }
+
+/* Kill legacy red/near-black surfaces that leak from old page CSS. */
+body[class*="pricing"] .plan.pro,
+body[class*="login"] .card,
+body[class*="history"] .history-card,
+body[class*="admin"] .admin-card {
+  background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.018)) !important;
+}
+
+/* Mobile: one consistent canvas */
+@media (max-width: 760px) {
+  .wrap, .main, .page, .content, .container {
+    width: calc(100% - 28px) !important;
+    max-width: none !important;
+  }
+  .nav, .topbar { padding-left: 14px !important; padding-right: 14px !important; }
+  .nav-logo, .logo, .topbar-logo { font-size: 20px !important; }
+  .panel, .card, .price, .plan, .qa-card, .video-preview-card,
+  .src-card, .channel, .step, .current-plan-banner, .transcript-panel,
+  .tp-card, .share, .reward, .rules, .activity, .faqitem, .faq,
+  .section, .dash, .stat-strip, .stats, .lock-card, .form-box, .note, .box {
+    border-radius: 18px !important;
+  }
+  .table-wrap, .comparison, .table { max-width: 100% !important; overflow-x: auto !important; }
+  .form-row { grid-template-columns: 1fr !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
