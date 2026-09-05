@@ -55,9 +55,5 @@ body {
    Same breakpoints used site-wide so every page grows to
    the same width as the home page on larger screens.
    480px (mobile default, set per-page) → 980px → 1040px */
-@media (min-width: 700px) {
-  body { max-width: 980px; }
-}
-@media (min-width: 1000px) {
-  body { max-width: 1040px; }
-}
+/* Width is controlled by reelscribe-premium.css so every page
+   uses the same responsive canvas. */

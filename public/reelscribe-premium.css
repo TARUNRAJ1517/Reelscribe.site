@@ -358,3 +358,66 @@ body{overflow-x:hidden}
 .rs-nav-plan.paid{background:rgba(255,61,110,.12);border-color:rgba(255,61,110,.28);color:#ff9ab5}
 .rs-menu-logout{color:#ff9ab5!important;border:1px solid rgba(255,61,110,.2)}
 @media(max-width:760px){.rs-nav-plan{display:none!important}}
+
+
+/* ============================================================
+   REELSCRIBE GLOBAL FIXES
+   - Remove legacy per-page body width caps
+   - Keep one responsive content canvas
+   - Make legacy controls inherit the premium system
+   ============================================================ */
+html, body{
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  min-width:0;
+}
+body{
+  overflow-x:hidden !important;
+}
+@media (min-width:761px){
+  body{
+    padding-left:0 !important;
+    padding-right:0 !important;
+  }
+}
+.wrap,.page,.main,.content,.container{
+  max-width:1180px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.rs-unified-nav + *{
+  /* Prevent old page-specific top offsets from fighting the unified nav. */
+}
+@media(max-width:760px){
+  .wrap,.page,.main,.content,.container{
+    width:calc(100% - 28px) !important;
+    max-width:none !important;
+  }
+}
+
+/* Legacy nav elements are replaced by reelscribe-premium.js.
+   This prevents a flash of the old nav while the script initializes. */
+body > header > nav.wrap,
+body > nav.nav,
+body > nav:not(.rs-unified-nav){
+  min-height:72px;
+}
+@media(max-width:760px){
+  body > header > nav.wrap,
+  body > nav.nav,
+  body > nav:not(.rs-unified-nav){
+    min-height:64px;
+  }
+}
+
+/* Consistent buttons / fields on every public page */
+button,input,textarea,select{
+  font-family:Inter,system-ui,sans-serif;
+}
+button,a{
+  -webkit-tap-highlight-color:transparent;
+}
+img,video{
+  max-width:100%;
+}
