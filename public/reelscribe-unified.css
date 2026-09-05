@@ -277,3 +277,147 @@ body[class*="admin"] .admin-card {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
 }
+
+/* =========================================================
+   REELSCRIBE — PREMIUM MOTION LAYER
+   Minimal motion: polished, responsive, never flashy.
+   ========================================================= */
+:root {
+  --rs-motion-fast: 160ms;
+  --rs-motion: 220ms;
+  --rs-motion-slow: 420ms;
+}
+
+@keyframes rs-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rs-soft-pulse {
+  0%, 100% { opacity: .55; }
+  50% { opacity: .9; }
+}
+
+@keyframes rs-shimmer {
+  from { transform: translateX(-110%); }
+  to { transform: translateX(110%); }
+}
+
+/* Page-load reveal: restrained and staggered. */
+main > *, .main > *, .page > *, .content > *,
+.hero > *, .hero-content > *, .dashboard > *, .dash > * {
+  animation: rs-fade-up var(--rs-motion-slow) cubic-bezier(.22,1,.36,1) both;
+}
+
+main > *:nth-child(2), .main > *:nth-child(2), .page > *:nth-child(2), .content > *:nth-child(2) { animation-delay: 45ms; }
+main > *:nth-child(3), .main > *:nth-child(3), .page > *:nth-child(3), .content > *:nth-child(3) { animation-delay: 90ms; }
+main > *:nth-child(4), .main > *:nth-child(4), .page > *:nth-child(4), .content > *:nth-child(4) { animation-delay: 135ms; }
+
+/* Premium lift without the generic-template feel. */
+.panel, .card, .price, .plan, .free-card, .qa-card,
+.video-preview-card, .src-card, .reel, .step, .history-card,
+.history-item, .stat-card, .admin-card, .table-card, .info-card,
+.box, .note {
+  transition: transform var(--rs-motion) cubic-bezier(.22,1,.36,1),
+              border-color var(--rs-motion),
+              box-shadow var(--rs-motion),
+              background var(--rs-motion) !important;
+  will-change: transform;
+}
+
+.panel:hover, .card:hover, .price:hover, .plan:hover, .free-card:hover,
+.qa-card:hover, .video-preview-card:hover, .src-card:hover, .reel:hover,
+.step:hover, .history-card:hover, .history-item:hover, .stat-card:hover,
+.admin-card:hover, .table-card:hover, .info-card:hover, .box:hover, .note:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,.14) !important;
+  box-shadow: 0 28px 80px rgba(0,0,0,.46) !important;
+}
+
+/* Thumbnail/media interaction. */
+img, video, .thumb, .thumbnail, .clip-thumb, .preview-thumb {
+  transition: transform 360ms cubic-bezier(.22,1,.36,1), filter 360ms ease !important;
+}
+
+.thumb:hover img, .thumbnail:hover img, .clip-thumb:hover img,
+.preview-thumb:hover img, .reel:hover img {
+  transform: scale(1.025);
+}
+
+/* Interactive controls. */
+button, a, input, textarea, select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a, button {
+  transition: color var(--rs-motion-fast) ease,
+              background-color var(--rs-motion-fast) ease,
+              border-color var(--rs-motion-fast) ease,
+              transform var(--rs-motion-fast) ease,
+              box-shadow var(--rs-motion-fast) ease !important;
+}
+
+button:active, .btn:active, .cta:active, .nav-btn:active,
+.hero-input-btn:active, .submit-btn:active {
+  transform: translateY(0) scale(.985) !important;
+}
+
+/* Upload/source areas get a quiet moving sheen on hover. */
+.upload, .upload-box, .dropzone, .drop-zone, .source-box,
+.hero-input-wrap, .upload-area {
+  position: relative;
+  overflow: hidden;
+}
+
+.upload::after, .upload-box::after, .dropzone::after, .drop-zone::after,
+.source-box::after, .hero-input-wrap::after, .upload-area::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -60%;
+  width: 42%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.045), transparent);
+  transform: translateX(0);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.upload:hover::after, .upload-box:hover::after, .dropzone:hover::after,
+.drop-zone:hover::after, .source-box:hover::after, .hero-input-wrap:hover::after,
+.upload-area:hover::after {
+  opacity: 1;
+  animation: rs-shimmer 900ms ease;
+}
+
+/* Focus states remain visible and calm. */
+:focus-visible {
+  outline: 2px solid rgba(63,216,192,.72) !important;
+  outline-offset: 3px !important;
+}
+
+/* Avoid motion on fixed/sticky chrome. */
+nav, .nav, .topbar, .drawer, .menu-box, .modal, .modal-box, .dropdown-menu {
+  animation: none !important;
+}
+
+/* Mobile: slightly less movement for touch devices. */
+@media (max-width: 760px) {
+  .panel:hover, .card:hover, .price:hover, .plan:hover, .free-card:hover,
+  .qa-card:hover, .video-preview-card:hover, .src-card:hover, .reel:hover,
+  .step:hover, .history-card:hover, .history-item:hover, .stat-card:hover,
+  .admin-card:hover, .table-card:hover, .info-card:hover, .box:hover, .note:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  main > *, .main > *, .page > *, .content > *,
+  .hero > *, .hero-content > *, .dashboard > *, .dash > * {
+    animation: none !important;
+  }
+  *, *::before, *::after {
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
