@@ -7,7 +7,7 @@
 }
 body {
   background: var(--bg); color: var(--text);
-  font-family: 'Archivo', -apple-system, sans-serif;
+  font-family: 'Inter', -apple-system, sans-serif;
   min-height: 100vh; -webkit-font-smoothing: antialiased;
 }
 .mono { font-family: 'IBM Plex Mono', monospace; }
@@ -26,7 +26,7 @@ label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform
 input, select {
   width: 100%; padding: 12px 14px; border-radius: 6px;
   border: 1px solid var(--border2); background: var(--s2); color: var(--text);
-  font-size: 14px; outline: none; margin-bottom: 14px; font-family: 'Archivo', sans-serif;
+  font-size: 14px; outline: none; margin-bottom: 14px; font-family: 'Inter', sans-serif;
   transition: border-color .2s;
 }
 input:focus, select:focus { border-color: var(--red); }
@@ -37,7 +37,7 @@ input[type="password"] { letter-spacing: 3px; }
   padding: 12px 18px; border: none; border-radius: 6px;
   background: var(--red); color: #1a0a08; font-size: 12.5px; font-weight: 600;
   letter-spacing: 0.4px; text-transform: uppercase; cursor: pointer;
-  font-family: 'Archivo', sans-serif; transition: opacity .2s; white-space: nowrap;
+  font-family: 'Inter', sans-serif; transition: opacity .2s; white-space: nowrap;
 }
 .btn:hover { opacity: .88; }
 .btn:disabled { opacity: .5; cursor: not-allowed; }
@@ -65,13 +65,13 @@ input[type="password"] { letter-spacing: 3px; }
 .topbar-logo { display: flex; align-items: center; gap: 7px; font-size: 15px; font-weight: 700; }
 .topbar-logo .ndot { width: 7px; height: 7px; border-radius: 50%; background: var(--red); }
 .topbar-right { display: flex; align-items: center; gap: 14px; }
-.topbar-right button { background: none; border: none; color: var(--muted); font-size: 12.5px; cursor: pointer; font-family: 'Archivo', sans-serif; }
+.topbar-right button { background: none; border: none; color: var(--muted); font-size: 12.5px; cursor: pointer; font-family: 'Inter', sans-serif; }
 .topbar-right button:hover { color: var(--sub); }
 
 .tabs { display: flex; gap: 4px; padding: 14px 24px 0; border-bottom: 1px solid var(--border); max-width: 1100px; margin: 0 auto; }
 .tab-btn {
   padding: 10px 16px; border: none; background: none; color: var(--muted);
-  font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: 'Archivo', sans-serif;
+  font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif;
   border-bottom: 2px solid transparent; margin-bottom: -1px;
 }
 .tab-btn.active { color: var(--text); border-bottom-color: var(--red); }
@@ -105,7 +105,7 @@ input[type="password"] { letter-spacing: 3px; }
 .filter-chip {
   padding: 6px 12px; border-radius: 100px; border: 1px solid var(--border2);
   background: var(--s2); color: var(--sub); font-size: 11.5px; cursor: pointer;
-  font-family: 'Archivo', sans-serif; transition: all .15s;
+  font-family: 'Inter', sans-serif; transition: all .15s;
 }
 .filter-chip.active { background: rgba(255,59,48,0.12); border-color: rgba(255,59,48,0.4); color: var(--red); }
 .filter-chip .cnt { color: var(--muted); margin-left: 4px; }

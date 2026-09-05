@@ -16,7 +16,7 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Archivo', -apple-system, sans-serif;
+  font-family: 'Inter', -apple-system, sans-serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -175,7 +175,7 @@ nav {
 .cta {
   width: 100%; padding: 13px; border-radius: 4px; border: none;
   font-size: 13px; font-weight: 600; cursor: pointer;
-  font-family: 'Archivo', sans-serif; letter-spacing: 0.6px; text-transform: uppercase;
+  font-family: 'Inter', sans-serif; letter-spacing: 0.6px; text-transform: uppercase;
   transition: opacity .2s, transform .1s;
 }
 .cta:active { transform: scale(0.98); }
@@ -200,7 +200,7 @@ nav {
   width: 100%; padding: 13px; border-radius: 4px;
   border: 1px solid var(--border2); background: transparent;
   color: var(--muted); font-size: 13px; font-weight: 500;
-  cursor: pointer; font-family: 'Archivo', sans-serif; transition: .2s;
+  cursor: pointer; font-family: 'Inter', sans-serif; transition: .2s;
   display: flex; align-items: center; justify-content: center; gap: 8px;
 }
 .support-btn svg { width: 15px; height: 15px; }

@@ -6,7 +6,7 @@
 }
 body {
   background: var(--bg); color: var(--text);
-  font-family: 'Archivo', -apple-system, sans-serif;
+  font-family: 'Inter', -apple-system, sans-serif;
   max-width: 480px; margin: 0 auto; min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -24,7 +24,7 @@ body {
   display: flex; align-items: center; gap: 6px;
   font-size: 13px; font-weight: 600; color: var(--sub);
   background: none; border: none; cursor: pointer;
-  font-family: 'Archivo', sans-serif; transition: color .2s;
+  font-family: 'Inter', sans-serif; transition: color .2s;
 }
 .nav-back svg { width: 14px; height: 14px; }
 .nav-back:hover { color: var(--text); }
