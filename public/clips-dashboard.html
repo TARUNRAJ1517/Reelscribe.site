@@ -3,393 +3,1029 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Clips Dashboard – ReelScribe</title>
+<title>Cut Clips Studio – ReelScribe</title>
+<link rel="stylesheet" href="/reelscribe.css">
 
+<style>
+/* =========================================================
+   ReelScribe Cut Clips Studio — black / orange redesign
+   IMPORTANT: existing clips-dashboard.js is kept intact.
+   ========================================================= */
+:root{
+  --rs-bg:#090908;
+  --rs-panel:#11110f;
+  --rs-panel2:#151512;
+  --rs-line:#292824;
+  --rs-line2:#38352f;
+  --rs-text:#f2eee6;
+  --rs-muted:#9b978f;
+  --rs-orange:#ff6a21;
+  --rs-orange2:#ff985c;
+  --rs-green:#69b884;
+}
 
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0!important;
+  background:var(--rs-bg)!important;
+  color:var(--rs-text)!important;
+  font-family:Inter,DM Sans,Arial,sans-serif!important;
+}
+button,input{font:inherit}
+a{text-decoration:none}
 
-  <link rel="stylesheet" href="/reelscribe.css">
+.rs-shell{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 75% 0%,rgba(255,106,33,.08),transparent 30%),
+    var(--rs-bg);
+}
+
+/* ---------- desktop sidebar ---------- */
+.rs-sidebar{
+  position:fixed;
+  z-index:50;
+  left:0;top:0;bottom:0;
+  width:248px;
+  border-right:1px solid var(--rs-line);
+  background:#0b0b0a;
+  padding:24px 16px 18px;
+  display:flex;
+  flex-direction:column;
+}
+.rs-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:3px 10px 28px;
+  color:#fff;
+  font-weight:800;
+  letter-spacing:-.04em;
+  font-size:20px;
+}
+.rs-brand-mark{
+  width:23px;height:23px;
+  border-radius:7px;
+  display:grid;place-items:center;
+  background:var(--rs-orange);
+  color:#0b0b0a;
+  font-size:13px;
+  font-weight:900;
+}
+.rs-nav-title{
+  color:#625f58;
+  text-transform:uppercase;
+  font-size:9px;
+  letter-spacing:.18em;
+  padding:0 11px 9px;
+}
+.rs-side-nav{display:grid;gap:4px}
+.rs-side-nav a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:11px 12px;
+  border-radius:8px;
+  color:#8f8b83;
+  font-size:13px;
+  transition:.18s ease;
+}
+.rs-side-nav a:hover{background:#171613;color:#fff}
+.rs-side-nav a.active{
+  background:#1a1714;
+  color:#fff;
+  box-shadow:inset 2px 0 0 var(--rs-orange);
+}
+.rs-side-nav svg{width:17px;height:17px;flex:none}
+.rs-side-bottom{margin-top:auto}
+.rs-plan{
+  border:1px solid var(--rs-line);
+  border-radius:12px;
+  padding:14px;
+  background:linear-gradient(145deg,#15130f,#0f0f0d);
+}
+.rs-plan-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:9px;
+}
+.rs-plan-name{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:#fff;
+}
+.rs-plan-badge{
+  color:var(--rs-orange2);
+  font-size:9px;
+  border:1px solid rgba(255,106,33,.35);
+  border-radius:999px;
+  padding:3px 7px;
+}
+.rs-plan p{margin:0 0 12px;color:#77736c;font-size:11px;line-height:1.45}
+.rs-plan button{
+  width:100%;
+  border:1px solid #4b3020;
+  background:#1a120d;
+  color:#ffb084;
+  border-radius:7px;
+  padding:8px;
+  cursor:pointer;
+  font-size:11px;
+}
+
+/* ---------- topbar ---------- */
+.rs-main{
+  margin-left:248px;
+  min-height:100vh;
+}
+.rs-topbar{
+  height:70px;
+  border-bottom:1px solid var(--rs-line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 34px;
+  background:rgba(9,9,8,.88);
+  backdrop-filter:blur(16px);
+  position:sticky;
+  top:0;
+  z-index:40;
+}
+.rs-crumb{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#77736c;
+  font-size:12px;
+}
+.rs-crumb strong{color:#eee9df;font-weight:600}
+.rs-crumb .slash{color:#3d3a35}
+.rs-top-actions{display:flex;align-items:center;gap:10px}
+.rs-top-plan{
+  color:#c4c0b8;
+  border:1px solid var(--rs-line2);
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:10px;
+}
+.rs-top-ref{
+  color:#ff9b68;
+  font-size:11px;
+  padding:7px 9px;
+}
+.rs-new{
+  border:1px solid #ff6a21;
+  background:var(--rs-orange);
+  color:#0b0b0a;
+  font-weight:800;
+  border-radius:7px;
+  padding:9px 13px;
+  cursor:pointer;
+}
+.rs-avatar{
+  width:31px;height:31px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid var(--rs-line2);
+  background:#171613;color:#ddd;
+  font-size:11px;font-weight:700;
+}
+.rs-mobile-menu{
+  display:none;
+  border:1px solid var(--rs-line2);
+  background:#151512;
+  color:#fff;
+  border-radius:7px;
+  width:35px;height:35px;
+}
+
+/* ---------- content ---------- */
+.rs-content{
+  max-width:1280px;
+  margin:0 auto;
+  padding:52px 42px 70px;
+}
+.rs-hero-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:30px;
+  margin-bottom:34px;
+}
+.rs-kicker{
+  color:var(--rs-orange);
+  font-size:10px;
+  letter-spacing:.19em;
+  text-transform:uppercase;
+  margin-bottom:13px;
+}
+.rs-title{
+  margin:0;
+  font-size:clamp(38px,5vw,68px);
+  line-height:.94;
+  letter-spacing:-.065em;
+  max-width:760px;
+  font-weight:800;
+}
+.rs-title em{
+  font-style:normal;
+  color:var(--rs-orange);
+}
+.rs-lead{
+  color:#8f8b83;
+  font-size:14px;
+  line-height:1.6;
+  max-width:470px;
+  margin:17px 0 0;
+}
+.rs-hero-meta{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.rs-chip{
+  border:1px solid var(--rs-line2);
+  border-radius:999px;
+  color:#aaa59c;
+  padding:7px 10px;
+  font-size:9px;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+
+/* ---------- stats ---------- */
+.rs-stat-strip{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--rs-line);
+  border-bottom:1px solid var(--rs-line);
+  margin-bottom:34px;
+}
+.rs-stat{
+  padding:17px 20px;
+  border-right:1px solid var(--rs-line);
+}
+.rs-stat:last-child{border-right:0}
+.rs-stat-num{font-size:25px;font-weight:700;letter-spacing:-.04em}
+.rs-stat-label{
+  margin-top:4px;color:#6f6b64;
+  font-size:9px;text-transform:uppercase;letter-spacing:.12em;
+}
+
+/* ---------- sections ---------- */
+.rs-section-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:30px 0 12px;
+}
+.rs-section-no{
+  color:var(--rs-orange);
+  font:11px/1 monospace;
+}
+.rs-section-name{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.17em;
+  color:#d7d2c8;
+}
+.rs-section-line{height:1px;background:var(--rs-line);flex:1}
+
+/* ---------- source ---------- */
+.rs-source{
+  border:1px solid var(--rs-line2);
+  background:
+    linear-gradient(135deg,rgba(255,106,33,.055),transparent 40%),
+    var(--rs-panel);
+  border-radius:14px;
+  padding:24px;
+}
+.rs-source-title{font-size:18px;font-weight:700;letter-spacing:-.03em}
+.rs-source-sub{font-size:11px;color:#77736c;margin:6px 0 18px}
+.rs-source-row{display:flex;gap:9px}
+.rs-source-row input{
+  min-width:0;flex:1;
+  border:1px solid #33312d;
+  background:#0b0b0a;
+  color:#f4efe6;
+  border-radius:8px;
+  padding:13px 14px;
+  outline:none;
+}
+.rs-source-row input:focus{border-color:#7b4027;box-shadow:0 0 0 3px rgba(255,106,33,.08)}
+.rs-source-note{
+  margin-top:11px;
+  display:flex;justify-content:space-between;
+  color:#67635c;font-size:9px;text-transform:uppercase;letter-spacing:.08em;
+}
+.rs-source-note b{color:#bcb7ad}
+.video-preview-card{
+  display:none;
+  margin-top:14px;
+  border:1px solid var(--rs-line);
+  background:#0c0c0b;
+  border-radius:9px;
+  overflow:hidden;
+}
+.vp-thumb{width:130px;height:73px;object-fit:cover;float:left;margin-right:12px}
+.vp-info{padding:11px}
+.vp-title{font-size:11px;color:#eee}
+.vp-channel{font-size:9px;color:#777;margin-top:5px}
+
+/* ---------- caption panel ---------- */
+.rs-panel{
+  border:1px solid var(--rs-line);
+  border-radius:14px;
+  background:var(--rs-panel);
+  overflow:hidden;
+}
+.panel-pad{padding:20px}
+.cp-master-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:17px;border-bottom:1px solid var(--rs-line);
+}
+.cp-master-title{font-size:14px;font-weight:700}
+.cp-master-desc{font-size:10px;color:#77736c;margin-top:4px}
+.cp-switch{display:inline-flex;cursor:pointer}
+.cp-switch input{display:none}
+.cp-switch-track{
+  width:42px;height:23px;border-radius:99px;background:#292824;
+  position:relative;transition:.2s;
+}
+.cp-switch-track:after{
+  content:"";position:absolute;top:3px;left:3px;width:17px;height:17px;
+  border-radius:50%;background:#8a867e;transition:.2s;
+}
+.cp-switch input:checked + .cp-switch-track{background:#71351e}
+.cp-switch input:checked + .cp-switch-track:after{left:22px;background:var(--rs-orange)}
+
+.cp-preview{
+  height:240px;margin:18px 0;
+  border:1px solid var(--rs-line);
+  border-radius:10px;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(255,106,33,.16),transparent 35%),
+    linear-gradient(145deg,#171714,#090908);
+  position:relative;display:flex;align-items:center;justify-content:center;
+}
+.cp-preview:before{
+  content:"9:16";
+  position:absolute;right:14px;top:12px;
+  color:#4e4b45;font:9px monospace;
+}
+.cp-preview-tag{
+  position:absolute;left:12px;top:11px;
+  color:#69655e;font:9px monospace;text-transform:uppercase;
+}
+.cp-words{
+  font-size:25px;font-weight:800;text-align:center;
+  max-width:75%;letter-spacing:-.04em;
+}
+.cp-tabbar{
+  display:flex;border-bottom:1px solid var(--rs-line);gap:4px;
+  overflow:auto;
+}
+.cp-tab{
+  padding:11px 14px;color:#706c65;font-size:10px;cursor:pointer;
+  white-space:nowrap;
+}
+.cp-tab.active{color:#fff;border-bottom:2px solid var(--rs-orange)}
+.cp-panel{display:none;padding-top:17px}
+.cp-panel.active{display:block}
+.cp-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px;
+}
+.cp-grid:empty{display:none}
+.cp-option,.opt-btn{
+  border:1px solid #302e2a;background:#11110f;color:#969189;
+  border-radius:7px;padding:9px 10px;cursor:pointer;font-size:10px;
+}
+.cp-option.selected,.opt-btn.selected{
+  border-color:#87401f;color:#fff;background:#1b130f;
+  box-shadow:inset 0 0 0 1px rgba(255,106,33,.18);
+}
+.cp-block{margin-top:17px}
+.cp-block-title{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#77736c;margin-bottom:8px}
+.opt-value{display:flex;gap:6px;flex-wrap:wrap}
+.cp-mode-desc{font-size:9px;color:#69655e;margin:8px 0 0}
+.cp-toggle-card{
+  border:1px solid var(--rs-line);border-radius:9px;padding:13px;margin-top:17px;
+}
+.cp-toggle-head{display:flex;justify-content:space-between;gap:15px}
+.cp-toggle-title-row{display:flex;gap:7px;align-items:center}
+.cp-toggle-title{font-size:11px;font-weight:700}
+.cp-new-badge{font-size:7px;color:#ff9b68;border:1px solid #60331f;padding:2px 5px;border-radius:4px}
+.cp-toggle-desc{font-size:9px;color:#6e6a63;margin:5px 0 0;line-height:1.5}
+.cp-subpos-row{display:flex;align-items:center;gap:12px;margin-top:13px;padding-top:13px;border-top:1px solid var(--rs-line)}
+.opt-label{font-size:9px;color:#6e6a63}
+.cp-custom-controls{border-top:1px solid var(--rs-line);padding-top:16px;margin-top:13px}
+.cp-slider-label-row,.cp-slider-range-labels{display:flex;justify-content:space-between;font-size:9px;color:#77736c}
+.cp-custom-controls input{width:100%;margin:13px 0}
+.cp-summary{color:#66625b;font-size:9px;margin-top:14px}
+
+/* ---------- CTA ---------- */
+.generate-main{
+  margin-top:15px;
+  width:100%;
+  border:0;
+  border-radius:8px;
+  padding:14px 18px;
+  background:var(--rs-orange);
+  color:#0b0b0a;
+  font-weight:800;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+}
+.generate-main:hover{background:#ff7c3c}
+.generate-main svg{width:16px;height:16px}
+.generate-hint{text-align:center;color:#625e57;font-size:9px;margin-top:8px}
+
+/* ---------- processing ---------- */
+.panel#procCard{margin-top:0}
+.proc-pad{padding:22px}
+.proc-scrub{height:4px;background:#272521;border-radius:99px;overflow:hidden}
+.proc-scrub-fill{height:100%;width:0;background:var(--rs-orange)}
+.proc-row{display:flex;justify-content:space-between;margin-top:12px;font-size:9px;color:#77736c}
+.proc-title{font-size:17px;font-weight:700;margin-top:13px}
+.proc-sub{font-size:10px;color:#6d6961;margin-top:5px}
+.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:20px}
+.proc-step{border:1px solid var(--rs-line);padding:9px;border-radius:7px;color:#615e57;font-size:8px}
+.proc-step.active{color:#ff9b68;border-color:#63331f}
+.proc-step-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:#4b4842;margin-right:5px}
+
+/* ---------- results ---------- */
+.sheet-scroll{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+.frame-card{
+  border:1px solid var(--rs-line);
+  background:var(--rs-panel);
+  border-radius:10px;
+  overflow:hidden;
+}
+.frame-thumb{
+  min-height:150px;
+  background:linear-gradient(145deg,#191714,#0a0a09);
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  color:#57534c;
+}
+.frame-idx,.frame-dur{
+  position:absolute;top:9px;
+  border:1px solid #3a332d;background:rgba(9,9,8,.85);
+  color:#b7b1a8;padding:4px 6px;border-radius:5px;font:8px monospace;
+}
+.frame-idx{left:9px}.frame-dur{right:9px}
+.frame-body{padding:13px}
+.frame-title{font-size:11px;font-weight:700}
+.frame-reason{font-size:9px;color:#69655e;line-height:1.45;margin-top:5px}
+.frame-dl{
+  margin-top:10px;border:1px solid #493020;background:#17100d;
+  color:#ff9b68;border-radius:6px;padding:7px 9px;font-size:9px;cursor:pointer;
+}
+.sheet-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.sheet-hint,.download-all-note{font-size:9px;color:#625e57}
+.download-all-btn{
+  border:1px solid #4b3020;background:#17100d;color:#ff9b68;
+  border-radius:7px;padding:8px 11px;cursor:pointer;font-size:9px;
+}
+.download-all-note{text-align:right;margin-top:7px}
+
+/* ---------- quick actions / log / tips / faq ---------- */
+.qa-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.qa-card{
+  border:1px solid var(--rs-line);border-radius:9px;padding:14px;
+  background:#10100e;color:#fff;
+}
+.qa-card:hover{border-color:#4a3428}
+.qa-icon{color:var(--rs-orange);margin-bottom:11px}
+.qa-icon svg{width:16px;height:16px}
+.qa-title{font-size:10px;font-weight:700}
+.qa-sub{font-size:8px;color:#66625b;margin-top:4px}
+.upgrade-banner{
+  border:1px solid #4b3020;border-radius:12px;
+  padding:22px;background:linear-gradient(135deg,#1b120d,#10100e);
+}
+.upgrade-banner h3{margin:0;font-size:18px}
+.upgrade-banner p{font-size:10px;color:#77736c;line-height:1.5}
+.upgrade-btn{
+  border:0;background:var(--rs-orange);color:#0b0b0a;
+  border-radius:7px;padding:9px 13px;font-weight:800;font-size:10px;cursor:pointer;
+}
+.log-card,.tips-card{
+  border:1px solid var(--rs-line);border-radius:10px;background:var(--rs-panel);padding:15px;
+}
+.log-card-head{display:flex;justify-content:space-between;align-items:center}
+.log-card-title{font-size:11px;font-weight:700}
+.log-card-sub{font-size:9px;color:#66625b;margin-top:4px}
+.log-toggle-pill{
+  border:1px solid var(--rs-line2);background:#141310;color:#aaa59d;
+  border-radius:99px;padding:6px 9px;font-size:9px;cursor:pointer;
+}
+.log-list{margin-top:12px}
+.log-empty{color:#5f5b54;font-size:9px}
+.tip-row{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid var(--rs-line)}
+.tip-row:last-child{border-bottom:0}
+.tip-num{font:9px monospace;color:var(--rs-orange)}
+.tip-row p{margin:0;color:#77736c;font-size:9px;line-height:1.5}
+.faq-list{border-top:1px solid var(--rs-line)}
+.faq-item{border-bottom:1px solid var(--rs-line);padding:14px 0}
+.faq-item summary{cursor:pointer;font-size:10px;color:#d4cfc5}
+.faq-item p{font-size:9px;color:#716d66;line-height:1.55;margin:9px 0 0}
+
+/* ---------- drawer / existing mobile hooks ---------- */
+.drawer-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.68);z-index:90;
+  display:none;
+}
+.drawer{
+  position:fixed;z-index:100;top:0;right:0;bottom:0;width:min(360px,88vw);
+  background:#11110f;border-left:1px solid var(--rs-line2);
+  transform:translateX(105%);transition:.25s ease;overflow:auto;
+}
+.drawer.open{transform:translateX(0)}
+.drawer-head{padding:25px;border-bottom:1px solid var(--rs-line)}
+.drawer-avatar{width:40px;height:40px;border-radius:50%;background:#1c1a17;display:grid;place-items:center;color:#fff}
+.drawer-name{font-weight:700;margin-top:12px}.drawer-email{font-size:10px;color:#6d6961;margin-top:3px}
+.drawer-plan-row{margin-top:18px;display:flex;justify-content:space-between;align-items:center}
+.drawer-plan-label{font-size:9px;color:#66625b;text-transform:uppercase}
+.drawer-plan-status{display:flex;gap:7px;align-items:center}
+.drawer-plan-value{font-size:10px;color:#fff}
+.drawer-upgrade-chip{border:1px solid #59321f;background:#17100d;color:#ff9b68;border-radius:5px;padding:5px 7px;font-size:8px}
+.drawer-body{padding:13px}
+.drawer-link{
+  width:100%;display:flex;align-items:center;gap:11px;
+  color:#9a958c;background:none;border:0;border-radius:7px;padding:12px;
+  font-size:11px;text-align:left;cursor:pointer;
+}
+.drawer-link:hover{background:#1a1815;color:#fff}
+.drawer-link svg{width:16px;height:16px;flex:none}
+.drawer-link-danger{color:#d47d57;margin-top:8px}
+
+/* Existing login/access/referral elements */
+.ref-credit-banner,.login-wall{border:1px solid var(--rs-line);border-radius:10px;background:#11110f}
+.ref-credit-banner{display:none;padding:13px;align-items:center;gap:10px}
+.ref-credit-icon{font-size:18px}.ref-credit-text{flex:1}.ref-credit-title{font-size:10px;font-weight:700}.ref-credit-sub{font-size:8px;color:#6d6961;margin-top:3px}.ref-credit-count{font-size:17px;color:#ff9b68;font-weight:800}
+.login-wall{padding:20px;text-align:center}.login-wall p{font-size:11px;color:#aaa59d}.login-wall-btn{border:0;background:var(--rs-orange);color:#111;padding:9px 13px;border-radius:7px;font-weight:800;cursor:pointer}
+
+/* footer */
+footer{
+  margin-top:60px;padding-top:22px;border-top:1px solid var(--rs-line);
+  display:flex;align-items:center;gap:15px;flex-wrap:wrap;color:#5e5a53;
+}
+.foot-logo{color:#d5d0c7;font-size:11px;font-weight:700}
+.foot-tag{font-size:9px}
+.foot-links{display:flex;gap:12px;margin-left:auto}
+.foot-links a{color:#69655e;font-size:9px}.foot-links a:hover{color:#fff}
+.foot-copy{width:100%;font-size:8px}
+
+/* Hide the old/global nav when this studio is shown.
+   The mobile drawer remains available. */
+body:has(.rs-shell) > nav.nav{display:none!important}
+
+@media(max-width:1000px){
+  .rs-sidebar{display:none}
+  .rs-main{margin-left:0}
+  .rs-mobile-menu{display:block}
+  .rs-topbar{padding:0 18px}
+  .rs-content{padding:38px 20px 55px}
+  .rs-top-ref,.rs-top-plan{display:none}
+  .rs-hero-row{align-items:flex-start;flex-direction:column}
+  .rs-hero-meta{justify-content:flex-start}
+}
+@media(max-width:700px){
+  .rs-topbar{height:62px}
+  .rs-crumb{font-size:10px}
+  .rs-new{display:none}
+  .rs-content{padding:28px 13px 45px}
+  .rs-title{font-size:42px}
+  .rs-lead{font-size:12px}
+  .rs-stat-strip{grid-template-columns:1fr}
+  .rs-stat{border-right:0;border-bottom:1px solid var(--rs-line)}
+  .rs-stat:last-child{border-bottom:0}
+  .rs-source{padding:16px}
+  .rs-source-row{flex-direction:column}
+  .cp-grid{grid-template-columns:repeat(2,1fr)}
+  .cp-preview{height:210px}
+  .cp-words{font-size:21px}
+  .proc-steps{grid-template-columns:1fr 1fr}
+  .sheet-scroll{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:3px}
+  .frame-card{min-width:78vw;scroll-snap-align:start}
+  .qa-grid{grid-template-columns:1fr 1fr}
+  .foot-links{margin-left:0;width:100%}
+}
+</style>
 </head>
+
 <body>
+<div class="rs-shell">
 
-<!-- DRAWER -->
-<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
-<div class="drawer" id="drawer">
-  <div class="drawer-head">
-    <div class="drawer-avatar mono" id="drawerAvatar">U</div>
-    <div class="drawer-name" id="drawerName">User</div>
-    <div class="drawer-email" id="drawerEmail">Loading...</div>
-    <div class="drawer-plan-row">
-      <span class="drawer-plan-label">Current Plan</span>
-      <div class="drawer-plan-status">
-        <span class="drawer-plan-value" id="drawerPlan">Free</span>
-        <button class="drawer-upgrade-chip" id="drawerUpgradeChip" onclick="window.location.href='/pricing.html'">Upgrade</button>
+  <!-- DESKTOP SIDEBAR -->
+  <aside class="rs-sidebar">
+    <div class="rs-brand"><span class="rs-brand-mark">R</span> ReelScribe</div>
+
+    <div class="rs-nav-title">Workspace</div>
+    <nav class="rs-side-nav">
+      <a href="/dashboard.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="/clips-dashboard.html" class="active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Cut Clips
+      </a>
+      <a href="/transcript.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg>
+        Transcript
+      </a>
+      <a href="/history.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 4 3 10 9 10"/></svg>
+        History
+      </a>
+      <a href="/pricing.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        Pricing
+      </a>
+      <a href="/referral.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/></svg>
+        Referral
+      </a>
+    </nav>
+
+    <div class="rs-side-bottom">
+      <div class="rs-plan">
+        <div class="rs-plan-top">
+          <span class="rs-plan-name" id="sidePlanName">Free Plan</span>
+          <span class="rs-plan-badge">ACTIVE</span>
+        </div>
+        <p>More clips, faster processing and premium caption tools.</p>
+        <button onclick="window.location.href='/pricing.html'">View plans →</button>
       </div>
+    </div>
+  </aside>
+
+  <!-- MOBILE / EXISTING DRAWER -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="drawer">
+    <div class="drawer-head">
+      <div class="drawer-avatar mono" id="drawerAvatar">U</div>
+      <div class="drawer-name" id="drawerName">User</div>
+      <div class="drawer-email" id="drawerEmail">Loading...</div>
+      <div class="drawer-plan-row">
+        <span class="drawer-plan-label">Current Plan</span>
+        <div class="drawer-plan-status">
+          <span class="drawer-plan-value" id="drawerPlan">Free</span>
+          <button class="drawer-upgrade-chip" id="drawerUpgradeChip" onclick="window.location.href='/pricing.html'">Upgrade</button>
+        </div>
+      </div>
+    </div>
+    <div class="drawer-body">
+      <a class="drawer-link" href="/dashboard.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Transcript Dashboard
+      </a>
+      <a class="drawer-link" href="/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </a>
+      <a class="drawer-link" href="/referral.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/></svg>
+        Invite &amp; Earn
+      </a>
+      <a class="drawer-link" href="/pricing.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Pricing &amp; Plans
+      </a>
+      <a class="drawer-link" href="/contact.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Support
+      </a>
+      <button class="drawer-link drawer-link-danger" onclick="logout()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </button>
     </div>
   </div>
-  <div class="drawer-body">
-    <a class="drawer-link" href="/dashboard.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      Transcript Dashboard
-    </a>
-    <a class="drawer-link" href="/">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Home
-    </a>
-    <a class="drawer-link" href="/referral.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 1 1 2.5-2.5C10 6 12 7 12 7Z"/><path d="M12 7h4.5A2.5 2.5 0 1 0 14 4.5C14 6 12 7 12 7Z"/></svg>
-      Invite & Earn
-    </a>
-    <a class="drawer-link" href="/pricing.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      Pricing & Plans
-    </a>
-    <a class="drawer-link" href="/contact.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Support
-    </a>
-    <button class="drawer-link drawer-link-danger" onclick="logout()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      Logout
-    </button>
-  </div>
-</div>
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-logo"><span class="mark"></span>ReelScribe</div>
-  <div class="nav-right">
-    <span class="nav-badge" id="navPlanBadge">Free</span>
-    <a class="rs-referral-link" href="/referral.html">🎁 <span class="rs-full">Invite &amp; </span>Earn</a>
-    <button class="nav-menu" onclick="openDrawer()" aria-label="Open menu">≡</button>
-  </div>
-</nav>
-
-<!-- PREMIUM 3D CLIP STUDIO HERO -->
-<section class="rs3d-hero rs3d-clips-hero">
-  <canvas id="rs3dCanvas" aria-hidden="true"></canvas><div class="rs3d-grid"></div><div class="rs3d-scan"></div>
-  <div class="rs3d-tag rs3d-tag-a"><span></span> AI SIGNAL<strong>Finding high-retention moments</strong></div>
-  <div class="rs3d-tag rs3d-tag-b">AUTO CAPTIONS</div><div class="rs3d-tag rs3d-tag-c">92% CLIP SCORE</div><div class="rs3d-tag rs3d-tag-d">9:16 READY</div>
-  <div class="rs3d-center-copy"><div class="rs3d-kicker">AI CLIP STUDIO</div><h2>Turn one long video into your best clips.</h2><p>Upload a source, let AI rank the strongest moments and generate short-form videos.</p><a class="rs3d-action" href="#srcLabel">Start clipping <b>→</b></a></div>
-  <div class="rs3d-hud"><div><small>ENGINE</small><strong>READY</strong></div><div><small>ANALYSIS</small><strong>LIVE</strong></div><div><small>QUALITY</small><strong>92%</strong></div></div>
-</section>
-
-<div class="reel">
-  <div class="reel-body">
-
-    <!-- STATS -->
-    <div class="frame-label"><span class="frame-num">—</span><span class="frame-name" id="welcomeName">Cut Clips</span><span class="frame-line"></span></div>
-    <div class="stat-strip">
-      <div class="stat-cell"><div class="stat-num" id="statClipsLeft">—</div><div class="stat-label">Clips left today</div></div>
-      <div class="stat-cell"><div class="stat-num" id="statClipsHistory">—</div><div class="stat-label">Videos (24h)</div></div>
-      <div class="stat-cell"><div class="stat-num" id="statPlan">Free</div><div class="stat-label">Plan</div></div>
-    </div>
-
-    <!-- REFERRAL CREDIT BANNER (shown only when user has unused referral clips) -->
-    <div class="ref-credit-banner" id="refCreditBanner">
-      <div class="ref-credit-icon">🎁</div>
-      <div class="ref-credit-text">
-        <div class="ref-credit-title">Referral clip<span id="refCreditPlural">s</span> ready to use</div>
-        <div class="ref-credit-sub">No upgrade needed — generate now, free credit will be used automatically.</div>
+  <main class="rs-main">
+    <header class="rs-topbar">
+      <div class="rs-crumb">
+        <span>Workspace</span><span class="slash">/</span><strong>Cut Clips Studio</strong>
       </div>
-      <div class="ref-credit-count" id="refCreditCount">0</div>
-    </div>
-
-    <!-- LOGIN / UPGRADE WALL -->
-    <div class="frame-label" id="wallLabel" style="display:none;"><span class="frame-num">—</span><span class="frame-name">Access</span><span class="frame-line"></span></div>
-    <div class="login-wall" id="loginWall" style="display:none;">
-      <p id="loginWallText">Login karo Cut Clips use karne ke liye.</p>
-      <button class="login-wall-btn" id="loginWallBtn">Login Karo →</button>
-    </div>
-
-    <!-- 01 SOURCE -->
-    <div class="frame-label" id="srcLabel"><span class="frame-num">01</span><span class="frame-name">Source</span><span class="frame-line"></span></div>
-    <div class="src-card" id="generateCard">
-      <span class="reg tl"></span><span class="reg tr"></span><span class="reg bl"></span><span class="reg br"></span>
-      <div class="src-title">Paste a link</div>
-      <div class="src-sub">Full video or a Short — we'll find what's worth cutting.</div>
-      <div class="src-row">
-        <input type="text" placeholder="youtube.com/watch?v=..." id="clipUrl">
+      <div class="rs-top-actions">
+        <span class="rs-top-plan" id="navPlanBadge">Free</span>
+        <a class="rs-top-ref" href="/referral.html">🎁 Invite &amp; Earn</a>
+        <button class="rs-new" onclick="document.getElementById('clipUrl')?.focus()">+ New Project</button>
+        <div class="rs-avatar" id="topAvatar">U</div>
+        <button class="rs-mobile-menu" onclick="openDrawer()" aria-label="Open menu">☰</button>
       </div>
-      <div class="src-meter">
-        <span class="src-meter-label">Clips left today</span>
-        <span class="src-meter-val"><b id="meterClipsLeft">—</b></span>
-      </div>
-      <div class="video-preview-card" id="videoPreviewCard">
-        <img id="vpThumb" class="vp-thumb" src="" alt="">
-        <div class="vp-info">
-          <div class="vp-title" id="vpTitle"></div>
-          <div class="vp-channel" id="vpChannel"></div>
-        </div>
-      </div>
-    </div>
+    </header>
 
-    <!-- 02 CAPTIONS -->
-    <div class="frame-label" id="capLabel"><span class="frame-num">02</span><span class="frame-name">Captions</span><span class="frame-line"></span></div>
-    <div class="panel" id="captionPickerSection">
-      <div class="panel-pad">
+    <div class="rs-content">
 
-        <div class="cp-master-row">
-          <div>
-            <div class="cp-master-title">Burn in captions</div>
-            <div class="cp-master-desc">Off? We'll cut the clip with no on-screen text.</div>
-          </div>
-          <label class="cp-switch">
-            <input type="checkbox" id="cpCaptionsToggle" checked>
-            <span class="cp-switch-track"></span>
-          </label>
-        </div>
-
-        <div id="cpBody">
-        <div class="cp-preview">
-          <div class="cp-preview-tag">Preview</div>
-          <div class="cp-words" id="cpWords"></div>
-        </div>
-
-        <div class="cp-tabbar" id="cpTabbar">
-          <div class="cp-tab active" data-tab="style">Style</div>
-          <div class="cp-tab" data-tab="animation">Motion</div>
-          <div class="cp-tab" data-tab="position">Position</div>
-          <div class="cp-tab" data-tab="output">Output</div>
-        </div>
-
-        <!-- STYLE -->
-        <div class="cp-panel active" id="cp-panel-style">
-          <div class="cp-grid" id="cpStyleGrid"></div>
-
-          <div class="cp-block">
-            <div class="cp-block-title">Caption Language</div>
-            <div class="opt-value" id="cpLangButtons" style="justify-content:flex-start;">
-              <button class="opt-btn selected" data-lang="hindi">Hindi</button>
-              <button class="opt-btn" data-lang="english">English</button>
-              <button class="opt-btn" data-lang="hinglish">Hinglish</button>
-            </div>
-            <p class="cp-mode-desc" id="cpLangDesc">Captions in Hindi (Devanagari).</p>
-          </div>
-        </div>
-
-        <!-- ANIMATION -->
-        <div class="cp-panel" id="cp-panel-animation">
-          <div class="cp-grid" id="cpAnimGrid"></div>
-
-          <div class="cp-block">
-            <div class="cp-block-title">Caption Mode</div>
-            <div class="opt-value" id="cpModeButtons" style="justify-content:flex-start;">
-              <button class="opt-btn" data-mode="wordpop">Word Pop</button>
-              <button class="opt-btn" data-mode="karaoke">Karaoke</button>
-              <button class="opt-btn selected" data-mode="standard">Standard</button>
-            </div>
-            <p class="cp-mode-desc" id="cpModeDesc">Chunk-by-chunk traditional captions.</p>
-          </div>
-
-          <div class="cp-block">
-            <div class="cp-block-title">Max Words Per Line</div>
-            <div class="opt-value" id="cpWordsRow" style="justify-content:flex-start;">
-              <button class="opt-btn" data-n="2">2</button>
-              <button class="opt-btn" data-n="3">3</button>
-              <button class="opt-btn selected" data-n="4">4</button>
-              <button class="opt-btn" data-n="5">5</button>
-              <button class="opt-btn" data-n="6">6</button>
-              <button class="opt-btn" data-n="7">7</button>
-            </div>
-          </div>
-
-          <div class="cp-toggle-card">
-            <div class="cp-toggle-head">
-              <div>
-                <div class="cp-toggle-title-row">
-                  <span class="cp-toggle-title">Auto Emoji Reactions</span>
-                  <span class="cp-new-badge">New</span>
-                </div>
-                <p class="cp-toggle-desc">Auto-detects emotion → adds 🔥😱🧠🤑⚠️🏆❤️😂 and more</p>
-              </div>
-              <label class="cp-switch">
-                <input type="checkbox" id="cpEmojiToggle" checked>
-                <span class="cp-switch-track"></span>
-              </label>
-            </div>
-            <div class="cp-subpos-row">
-              <span class="opt-label">Position</span>
-              <div class="opt-value" id="cpSubposButtons" style="flex:1;">
-                <button class="opt-btn" data-subpos="start">Start</button>
-                <button class="opt-btn selected" data-subpos="end">End</button>
-                <button class="opt-btn" data-subpos="none">None</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- POSITION -->
-        <div class="cp-panel" id="cp-panel-position">
-          <div class="opt-value" id="cpPosButtons" style="justify-content:flex-start; margin-bottom:6px;">
-            <button class="opt-btn" data-pos="bottom">↓ Bottom</button>
-            <button class="opt-btn" data-pos="center">◎ Center</button>
-            <button class="opt-btn" data-pos="top">↑ Top</button>
-            <button class="opt-btn" data-pos="custom">⚙ Custom</button>
-          </div>
-          <div class="cp-custom-controls" id="cpCustomControls" style="display:none;">
-            <div class="cp-slider-label-row">
-              <span>Margin from bottom</span>
-              <span id="cpMarginValue">430px</span>
-            </div>
-            <input type="range" id="cpMarginSlider" min="0" max="960" value="430">
-            <div class="cp-slider-range-labels">
-              <span>Bottom (0)</span>
-              <span>Top (960)</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- OUTPUT -->
-        <div class="cp-panel" id="cp-panel-output">
-          <div class="cp-block-title" style="margin-top:0;">Aspect Ratio</div>
-          <div class="cp-grid" id="cpRatioGrid"></div>
-          <div class="cp-block-title">Quality</div>
-          <div class="cp-grid" id="cpQualityGrid"></div>
-        </div>
-
-        <div class="cp-summary mono" id="cpSummary"></div>
-        </div>
-      </div>
-    </div>
-
-    <button class="generate-main" id="genBtn" onclick="generateClips()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      <span>Generate Clips</span>
-    </button>
-    <div class="generate-hint" id="genHint">2–5 min per video</div>
-
-    <!-- PROCESSING -->
-    <div class="frame-label" id="procLabel" style="display:none;"><span class="frame-num">—</span><span class="frame-name">Processing</span><span class="frame-line"></span></div>
-    <div class="panel" id="procCard" style="display:none;">
-      <div class="proc-pad">
-        <div class="proc-scrub"><div class="proc-scrub-fill" id="scrubFill"></div></div>
-        <div class="proc-row">
-          <span class="proc-tc mono" id="procTc">00:00:00:00</span>
-          <span class="proc-status" id="procStatus">RENDERING</span>
-        </div>
-        <div class="proc-title" id="procTitle">Analyzing source video</div>
-        <div class="proc-sub" id="procSub">Usually takes 2–5 minutes. Keep this tab open.</div>
-        <div class="proc-steps">
-          <div class="proc-step active" id="step1"><span class="proc-step-dot"></span>Downloading video</div>
-          <div class="proc-step" id="step2"><span class="proc-step-dot"></span>Transcribing audio</div>
-          <div class="proc-step" id="step3"><span class="proc-step-dot"></span>Scoring segments</div>
-          <div class="proc-step" id="step4"><span class="proc-step-dot"></span>Cutting & rendering</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 03 OUTPUT -->
-    <div class="frame-label" id="outLabel" style="display:none;"><span class="frame-num">03</span><span class="frame-name" id="outName">Output</span><span class="frame-line"></span></div>
-    <div id="resultsSection" style="display:none;">
-      <div class="sheet-scroll" id="sheetScroll"></div>
-      <div class="sheet-footer">
-        <div class="sheet-hint">← scroll for all clips</div>
-        <button class="download-all-btn" id="downloadAllBtn" onclick="downloadAllClips()" style="display:none;">Download All</button>
-      </div>
-      <div class="download-all-note">Browser may ask permission for multiple downloads</div>
-    </div>
-
-    <!-- QUICK ACTIONS -->
-    <div class="frame-label"><span class="frame-num">—</span><span class="frame-name">Quick Actions</span><span class="frame-line"></span></div>
-    <div class="qa-grid">
-      <a class="qa-card" href="/">
-        <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-        <div class="qa-title">Home</div>
-        <div class="qa-sub">Back to the main page</div>
-      </a>
-      <a class="qa-card" href="/dashboard.html">
-        <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-        <div class="qa-title">Transcript Dashboard</div>
-        <div class="qa-sub">View your saved transcripts</div>
-      </a>
-      <a class="qa-card" href="/pricing.html">
-        <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-        <div class="qa-title">Upgrade Plan</div>
-        <div class="qa-sub">Get more transcripts & clips</div>
-      </a>
-      <a class="qa-card" href="/contact.html">
-        <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="qa-title">Support</div>
-        <div class="qa-sub">Contact us anytime</div>
-      </a>
-    </div>
-
-    <!-- UPGRADE BANNER (free users) -->
-    <div class="frame-label" id="upgradeLabel" style="display:none;"><span class="frame-num">—</span><span class="frame-name">Upgrade</span><span class="frame-line"></span></div>
-    <div class="upgrade-banner" id="upgradeBanner" style="display:none">
-      <h3>Unlock More Power</h3>
-      <p>AI clip generation, 30+ transcripts/month, and priority processing — starting at just ₹149/mo.</p>
-      <button class="upgrade-btn" onclick="window.location.href='/pricing.html'">View Plans →</button>
-    </div>
-    
-
-    <!-- LOG (history) -->
-    <div class="frame-label"><span class="frame-num">—</span><span class="frame-name">Log</span><span class="frame-line"></span></div>
-    <div class="log-card">
-      <div class="log-card-head">
+      <section class="rs-hero-row">
         <div>
-          <div class="log-card-title">Past Clips</div>
-          <div class="log-card-sub" id="statClipsHistorySub">Your generated videos</div>
+          <div class="rs-kicker">AI CLIP STUDIO</div>
+          <h1 class="rs-title">Cut the moments<br>worth <em>watching.</em></h1>
+          <p class="rs-lead">Turn a long YouTube video into high-retention short clips. Paste your source, tune the captions, and let ReelScribe find the strongest moments.</p>
         </div>
-        <button class="log-toggle-pill" id="histToggle" onclick="toggleClipHistory()">
-          <span class="btn-label">Show</span><span class="chev">▾</span>
-        </button>
-      </div>
-      <div class="log-list" id="clipHistoryList">
-        <div class="log-empty">Loading…</div>
-      </div>
-    </div>
-    
-    <!-- TIPS -->
-    <div class="frame-label"><span class="frame-num">—</span><span class="frame-name">Tips</span><span class="frame-line"></span></div>
-    <div class="tips-card">
-      <div class="tip-row"><span class="tip-num">01</span><p>Longer source videos usually give the AI more moments to pick from — better hit rate on viral clips.</p></div>
-      <div class="tip-row"><span class="tip-num">02</span><p>Word Pop and Karaoke captions tend to perform best on Reels and Shorts — try them before Static.</p></div>
-      <div class="tip-row"><span class="tip-num">03</span><p>Download your clips within 24 hours — after that they're auto-deleted from our servers.</p></div>
-    </div>
+        <div class="rs-hero-meta">
+          <span class="rs-chip">AI Analysis</span>
+          <span class="rs-chip">Auto Captions</span>
+          <span class="rs-chip">9:16 Ready</span>
+        </div>
+      </section>
 
-    <!-- FAQ -->
-    <div class="frame-label"><span class="frame-num">—</span><span class="frame-name">FAQ</span><span class="frame-line"></span></div>
-    <div class="faq-list">
-      <details class="faq-item">
-        <summary>Do I need to keep the tab open while it processes?</summary>
-        <p>Yes for now — keep this tab open until the clips finish rendering. We'll add background processing with a notification soon.</p>
-      </details>
-      <details class="faq-item">
-        <summary>What happens to my clips after 24 hours?</summary>
-        <p>Clips are automatically deleted from our servers 24 hours after they're generated. Download anything you want to keep before then.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Can I change captions after generating?</summary>
-        <p>Not yet — caption style is baked into the clip during rendering. Set your style before hitting Generate, or re-run the video with a different style.</p>
-      </details>
-      <details class="faq-item">
-        <summary>Why did I get fewer than 12 clips?</summary>
-        <p>The AI only cuts moments it scores as genuinely strong — a shorter or less eventful source video may yield fewer clips.</p>
-      </details>
-    </div>
-
-    <footer>
-      <div class="foot-logo"><span class="mark"></span>ReelScribe</div>
-      <div class="foot-tag">cut once, post everywhere</div>
-      <div class="foot-links">
-        <a href="/about.html">About</a>
-        <a href="/pricing.html">Pricing</a>
-        <a href="/contact.html">Contact</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/privacy.html">Privacy</a>
+      <div class="rs-stat-strip">
+        <div class="rs-stat"><div class="rs-stat-num" id="statClipsLeft">—</div><div class="rs-stat-label">Clips left today</div></div>
+        <div class="rs-stat"><div class="rs-stat-num" id="statClipsHistory">—</div><div class="rs-stat-label">Videos in 24h</div></div>
+        <div class="rs-stat"><div class="rs-stat-num" id="statPlan">Free</div><div class="rs-stat-label">Current plan</div></div>
       </div>
-      <div class="foot-copy">© 2026 REELSCRIBE. ALL RIGHTS RESERVED.</div>
-    </footer>
 
-  </div>
+      <div class="ref-credit-banner" id="refCreditBanner">
+        <div class="ref-credit-icon">🎁</div>
+        <div class="ref-credit-text">
+          <div class="ref-credit-title">Referral clip<span id="refCreditPlural">s</span> ready to use</div>
+          <div class="ref-credit-sub">No upgrade needed — generate now, free credit will be used automatically.</div>
+        </div>
+        <div class="ref-credit-count" id="refCreditCount">0</div>
+      </div>
+
+      <div class="rs-section-head" id="wallLabel" style="display:none">
+        <span class="rs-section-no">—</span><span class="rs-section-name">Access</span><span class="rs-section-line"></span>
+      </div>
+      <div class="login-wall" id="loginWall" style="display:none">
+        <p id="loginWallText">Login karo Cut Clips use karne ke liye.</p>
+        <button class="login-wall-btn" id="loginWallBtn">Login Karo →</button>
+      </div>
+
+      <!-- 01 SOURCE -->
+      <div class="rs-section-head" id="srcLabel">
+        <span class="rs-section-no">01</span><span class="rs-section-name">Source</span><span class="rs-section-line"></span>
+      </div>
+      <section class="rs-source" id="generateCard">
+        <div class="rs-source-title">Start with your source.</div>
+        <div class="rs-source-sub">Paste a YouTube link. ReelScribe will analyze the video and find the moments worth turning into Shorts/Reels.</div>
+        <div class="rs-source-row">
+          <input type="text" id="clipUrl" placeholder="youtube.com/watch?v=..." autocomplete="off">
+        </div>
+        <div class="rs-source-note">
+          <span>Available clip credits</span>
+          <span><b id="meterClipsLeft">—</b></span>
+        </div>
+        <div class="video-preview-card" id="videoPreviewCard">
+          <img id="vpThumb" class="vp-thumb" src="" alt="">
+          <div class="vp-info">
+            <div class="vp-title" id="vpTitle"></div>
+            <div class="vp-channel" id="vpChannel"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 CAPTIONS -->
+      <div class="rs-section-head" id="capLabel">
+        <span class="rs-section-no">02</span><span class="rs-section-name">Captions</span><span class="rs-section-line"></span>
+      </div>
+      <section class="rs-panel" id="captionPickerSection">
+        <div class="panel-pad">
+          <div class="cp-master-row">
+            <div>
+              <div class="cp-master-title">Burn in captions</div>
+              <div class="cp-master-desc">Off? We'll cut the clip with no on-screen text.</div>
+            </div>
+            <label class="cp-switch">
+              <input type="checkbox" id="cpCaptionsToggle" checked>
+              <span class="cp-switch-track"></span>
+            </label>
+          </div>
+
+          <div id="cpBody">
+            <div class="cp-preview">
+              <div class="cp-preview-tag">Preview</div>
+              <div class="cp-words" id="cpWords"></div>
+            </div>
+
+            <div class="cp-tabbar" id="cpTabbar">
+              <div class="cp-tab active" data-tab="style">Style</div>
+              <div class="cp-tab" data-tab="animation">Motion</div>
+              <div class="cp-tab" data-tab="position">Position</div>
+              <div class="cp-tab" data-tab="output">Output</div>
+            </div>
+
+            <div class="cp-panel active" id="cp-panel-style">
+              <div class="cp-grid" id="cpStyleGrid"></div>
+              <div class="cp-block">
+                <div class="cp-block-title">Caption Language</div>
+                <div class="opt-value" id="cpLangButtons">
+                  <button class="opt-btn selected" data-lang="hindi">Hindi</button>
+                  <button class="opt-btn" data-lang="english">English</button>
+                  <button class="opt-btn" data-lang="hinglish">Hinglish</button>
+                </div>
+                <p class="cp-mode-desc" id="cpLangDesc">Captions in Hindi (Devanagari).</p>
+              </div>
+            </div>
+
+            <div class="cp-panel" id="cp-panel-animation">
+              <div class="cp-grid" id="cpAnimGrid"></div>
+              <div class="cp-block">
+                <div class="cp-block-title">Caption Mode</div>
+                <div class="opt-value" id="cpModeButtons">
+                  <button class="opt-btn" data-mode="wordpop">Word Pop</button>
+                  <button class="opt-btn" data-mode="karaoke">Karaoke</button>
+                  <button class="opt-btn selected" data-mode="standard">Standard</button>
+                </div>
+                <p class="cp-mode-desc" id="cpModeDesc">Chunk-by-chunk traditional captions.</p>
+              </div>
+              <div class="cp-block">
+                <div class="cp-block-title">Max Words Per Line</div>
+                <div class="opt-value" id="cpWordsRow">
+                  <button class="opt-btn" data-n="2">2</button>
+                  <button class="opt-btn" data-n="3">3</button>
+                  <button class="opt-btn selected" data-n="4">4</button>
+                  <button class="opt-btn" data-n="5">5</button>
+                  <button class="opt-btn" data-n="6">6</button>
+                  <button class="opt-btn" data-n="7">7</button>
+                </div>
+              </div>
+              <div class="cp-toggle-card">
+                <div class="cp-toggle-head">
+                  <div>
+                    <div class="cp-toggle-title-row"><span class="cp-toggle-title">Auto Emoji Reactions</span><span class="cp-new-badge">New</span></div>
+                    <p class="cp-toggle-desc">Auto-detects emotion → adds 🔥😱🧠🤑⚠️🏆❤️😂 and more</p>
+                  </div>
+                  <label class="cp-switch">
+                    <input type="checkbox" id="cpEmojiToggle" checked>
+                    <span class="cp-switch-track"></span>
+                  </label>
+                </div>
+                <div class="cp-subpos-row">
+                  <span class="opt-label">Position</span>
+                  <div class="opt-value" id="cpSubposButtons">
+                    <button class="opt-btn" data-subpos="start">Start</button>
+                    <button class="opt-btn selected" data-subpos="end">End</button>
+                    <button class="opt-btn" data-subpos="none">None</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="cp-panel" id="cp-panel-position">
+              <div class="opt-value" id="cpPosButtons">
+                <button class="opt-btn" data-pos="bottom">↓ Bottom</button>
+                <button class="opt-btn" data-pos="center">◎ Center</button>
+                <button class="opt-btn" data-pos="top">↑ Top</button>
+                <button class="opt-btn" data-pos="custom">⚙ Custom</button>
+              </div>
+              <div class="cp-custom-controls" id="cpCustomControls" style="display:none">
+                <div class="cp-slider-label-row"><span>Margin from bottom</span><span id="cpMarginValue">430px</span></div>
+                <input type="range" id="cpMarginSlider" min="0" max="960" value="430">
+                <div class="cp-slider-range-labels"><span>Bottom (0)</span><span>Top (960)</span></div>
+              </div>
+            </div>
+
+            <div class="cp-panel" id="cp-panel-output">
+              <div class="cp-block-title" style="margin-top:0">Aspect Ratio</div>
+              <div class="cp-grid" id="cpRatioGrid"></div>
+              <div class="cp-block-title">Quality</div>
+              <div class="cp-grid" id="cpQualityGrid"></div>
+            </div>
+
+            <div class="cp-summary mono" id="cpSummary"></div>
+          </div>
+        </div>
+      </section>
+
+      <button class="generate-main" id="genBtn" onclick="generateClips()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span>Generate Clips</span>
+      </button>
+      <div class="generate-hint" id="genHint">2–5 min per video</div>
+
+      <!-- PROCESSING -->
+      <div class="rs-section-head" id="procLabel" style="display:none">
+        <span class="rs-section-no">—</span><span class="rs-section-name">Processing</span><span class="rs-section-line"></span>
+      </div>
+      <section class="rs-panel" id="procCard" style="display:none">
+        <div class="proc-pad">
+          <div class="proc-scrub"><div class="proc-scrub-fill" id="scrubFill"></div></div>
+          <div class="proc-row"><span class="proc-tc mono" id="procTc">00:00:00:00</span><span class="proc-status" id="procStatus">RENDERING</span></div>
+          <div class="proc-title" id="procTitle">Analyzing source video</div>
+          <div class="proc-sub" id="procSub">Usually takes 2–5 minutes. Keep this tab open.</div>
+          <div class="proc-steps">
+            <div class="proc-step active" id="step1"><span class="proc-step-dot"></span>Downloading video</div>
+            <div class="proc-step" id="step2"><span class="proc-step-dot"></span>Transcribing audio</div>
+            <div class="proc-step" id="step3"><span class="proc-step-dot"></span>Scoring segments</div>
+            <div class="proc-step" id="step4"><span class="proc-step-dot"></span>Cutting &amp; rendering</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 OUTPUT -->
+      <div class="rs-section-head" id="outLabel" style="display:none">
+        <span class="rs-section-no">03</span><span class="rs-section-name" id="outName">Output</span><span class="rs-section-line"></span>
+      </div>
+      <section id="resultsSection" style="display:none">
+        <div class="sheet-scroll" id="sheetScroll"></div>
+        <div class="sheet-footer">
+          <div class="sheet-hint">← scroll for all clips</div>
+          <button class="download-all-btn" id="downloadAllBtn" onclick="downloadAllClips()" style="display:none">Download All</button>
+        </div>
+        <div class="download-all-note">Browser may ask permission for multiple downloads</div>
+      </section>
+
+      <!-- QUICK ACTIONS -->
+      <div class="rs-section-head">
+        <span class="rs-section-no">—</span><span class="rs-section-name">Quick Actions</span><span class="rs-section-line"></span>
+      </div>
+      <div class="qa-grid">
+        <a class="qa-card" href="/"><div class="qa-icon">⌂</div><div class="qa-title">Home</div><div class="qa-sub">Back to the main page</div></a>
+        <a class="qa-card" href="/dashboard.html"><div class="qa-icon">▤</div><div class="qa-title">Transcript Dashboard</div><div class="qa-sub">View saved transcripts</div></a>
+        <a class="qa-card" href="/pricing.html"><div class="qa-icon">▣</div><div class="qa-title">Upgrade Plan</div><div class="qa-sub">Get more transcripts &amp; clips</div></a>
+        <a class="qa-card" href="/contact.html"><div class="qa-icon">□</div><div class="qa-title">Support</div><div class="qa-sub">Contact us anytime</div></a>
+      </div>
+
+      <!-- UPGRADE -->
+      <div class="rs-section-head" id="upgradeLabel" style="display:none">
+        <span class="rs-section-no">—</span><span class="rs-section-name">Upgrade</span><span class="rs-section-line"></span>
+      </div>
+      <div class="upgrade-banner" id="upgradeBanner" style="display:none">
+        <h3>Unlock More Power</h3>
+        <p>AI clip generation, 30+ transcripts/month, and priority processing — starting at just ₹149/mo.</p>
+        <button class="upgrade-btn" onclick="window.location.href='/pricing.html'">View Plans →</button>
+      </div>
+
+      <!-- LOG -->
+      <div class="rs-section-head">
+        <span class="rs-section-no">—</span><span class="rs-section-name">Log</span><span class="rs-section-line"></span>
+      </div>
+      <section class="log-card">
+        <div class="log-card-head">
+          <div><div class="log-card-title">Past Clips</div><div class="log-card-sub" id="statClipsHistorySub">Your generated videos</div></div>
+          <button class="log-toggle-pill" id="histToggle" onclick="toggleClipHistory()"><span class="btn-label">Show</span><span class="chev">▾</span></button>
+        </div>
+        <div class="log-list" id="clipHistoryList"><div class="log-empty">Loading…</div></div>
+      </section>
+
+      <!-- TIPS -->
+      <div class="rs-section-head">
+        <span class="rs-section-no">—</span><span class="rs-section-name">Tips</span><span class="rs-section-line"></span>
+      </div>
+      <section class="tips-card">
+        <div class="tip-row"><span class="tip-num">01</span><p>Longer source videos usually give the AI more moments to pick from — better hit rate on viral clips.</p></div>
+        <div class="tip-row"><span class="tip-num">02</span><p>Word Pop and Karaoke captions tend to perform best on Reels and Shorts — try them before Static.</p></div>
+        <div class="tip-row"><span class="tip-num">03</span><p>Download your clips within 24 hours — after that they're auto-deleted from our servers.</p></div>
+      </section>
+
+      <!-- FAQ -->
+      <div class="rs-section-head">
+        <span class="rs-section-no">—</span><span class="rs-section-name">FAQ</span><span class="rs-section-line"></span>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item"><summary>Do I need to keep the tab open while it processes?</summary><p>Yes for now — keep this tab open until the clips finish rendering.</p></details>
+        <details class="faq-item"><summary>What happens to my clips after 24 hours?</summary><p>Clips are automatically deleted from our servers 24 hours after they're generated. Download anything you want to keep before then.</p></details>
+        <details class="faq-item"><summary>Can I change captions after generating?</summary><p>Not yet — caption style is baked into the clip during rendering. Set your style before hitting Generate.</p></details>
+        <details class="faq-item"><summary>Why did I get fewer than 12 clips?</summary><p>The AI only cuts moments it scores as genuinely strong — a shorter or less eventful source video may yield fewer clips.</p></details>
+      </div>
+
+      <footer>
+        <div class="foot-logo">ReelScribe</div>
+        <div class="foot-tag">cut once, post everywhere</div>
+        <div class="foot-links">
+          <a href="/about.html">About</a><a href="/pricing.html">Pricing</a><a href="/contact.html">Contact</a><a href="/terms.html">Terms</a><a href="/privacy.html">Privacy</a>
+        </div>
+        <div class="foot-copy">© 2026 REELSCRIBE. ALL RIGHTS RESERVED.</div>
+      </footer>
+    </div>
+  </main>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
 <script>
-(()=>{const canvas=document.getElementById('rs3dCanvas');if(!canvas||typeof THREE==='undefined')return;const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(42,1,.1,100);camera.position.z=7;const group=new THREE.Group();scene.add(group);scene.add(new THREE.AmbientLight(0xc9ead5,1.15));const a=new THREE.PointLight(0xa5dfbb,18,10);a.position.set(2.7,2.1,3);scene.add(a);const b=new THREE.PointLight(0x4f9e73,12,9);b.position.set(-3,-1.4,2);scene.add(b);const material=new THREE.MeshPhysicalMaterial({color:0x79c396,metalness:.5,roughness:.2,clearcoat:1,clearcoatRoughness:.1});const knot=new THREE.Mesh(new THREE.TorusKnotGeometry(1.35,.39,220,32,2,3),material);group.add(knot);const shell=new THREE.Mesh(new THREE.IcosahedronGeometry(2.3,2),new THREE.MeshBasicMaterial({color:0x9cddb6,wireframe:true,transparent:true,opacity:.12}));group.add(shell);const core=new THREE.Mesh(new THREE.SphereGeometry(1.18,56,56),new THREE.MeshPhysicalMaterial({color:0x173525,emissive:0x112619,emissiveIntensity:1.35,roughness:.28,clearcoat:1}));group.add(core);const pts=[];for(let i=0;i<260;i++){let rr=2.7+Math.random()*1.6,ang=Math.random()*Math.PI*2,z=(Math.random()-.5)*2;pts.push(rr*Math.cos(ang),rr*Math.sin(ang),z)}const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));group.add(new THREE.Points(pg,new THREE.PointsMaterial({color:0x9bdab4,size:.018,transparent:true,opacity:.45})));let mx=0,my=0;addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});function resize(){const q=canvas.getBoundingClientRect();renderer.setSize(q.width,q.height,false);camera.aspect=q.width/q.height;camera.updateProjectionMatrix()}resize();addEventListener('resize',resize);const clock=new THREE.Clock();function tick(){requestAnimationFrame(tick);const t=clock.getElapsedTime();group.rotation.y=t*.12+mx*.5;group.rotation.x=Math.sin(t*.4)*.05+my;knot.rotation.z=t*.18;shell.rotation.y=-t*.05;a.position.x=2.7+Math.sin(t)*.6;a.position.y=2.1+Math.cos(t*.8)*.4;renderer.render(scene,camera)}tick()})();
+/* Small compatibility layer for the new shell. The real generation logic remains in clips-dashboard.js. */
+function openDrawer(){
+  const d=document.getElementById('drawer'), o=document.getElementById('drawerOverlay');
+  if(d)d.classList.add('open'); if(o)o.style.display='block';
+}
+function closeDrawer(){
+  const d=document.getElementById('drawer'), o=document.getElementById('drawerOverlay');
+  if(d)d.classList.remove('open'); if(o)o.style.display='none';
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const topAvatar=document.getElementById('topAvatar');
+  const drawerAvatar=document.getElementById('drawerAvatar');
+  const observer=new MutationObserver(()=>{
+    if(topAvatar && drawerAvatar) topAvatar.textContent=(drawerAvatar.textContent||'U').trim().slice(0,1).toUpperCase();
+  });
+  if(drawerAvatar)observer.observe(drawerAvatar,{childList:true,subtree:true,characterData:true});
+});
 </script>
+
+<!-- KEEP THE EXISTING FUNCTIONAL BACKEND/FRONTEND JS -->
 <script src="/assets/js/clips-dashboard.js" defer></script>
-  <script src="/assets/js/reelscribe-premium.js"></script>
+<script src="/assets/js/reelscribe-premium.js"></script>
 </body>
 </html>
