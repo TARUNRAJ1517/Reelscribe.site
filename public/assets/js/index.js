@@ -106,6 +106,7 @@ function generateClips(){
   window.location.href = "/clips-dashboard.html?ytUrl=" + encodeURIComponent(url) + "&autostart=1";
 }
 
+/* ===== Ambient redesign: scroll reveals + hero tilt ===== */
 (() => {
   const revealItems = document.querySelectorAll("[data-reveal]");
 
