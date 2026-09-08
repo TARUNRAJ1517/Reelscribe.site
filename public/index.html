@@ -1,47 +1,315 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ReelScribe — Long video. Better moments.</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
-:root{--bg:#0b0b0a;--paper:#f2eee6;--muted:#aaa69d;--line:#292825;--orange:#ff6a21;--orange2:#ff9b54}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:#f4f1ea;font-family:"DM Sans",sans-serif;overflow-x:hidden}
-a{text-decoration:none;color:inherit}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;border-bottom:1px solid #191917;position:relative;z-index:10;background:rgba(11,11,10,.78);backdrop-filter:blur(14px)}
-.logo{font:800 22px Manrope;letter-spacing:-.8px}.logo span{color:#fff}.logo i{color:var(--orange);font-style:normal}.navlinks{display:flex;gap:32px;color:#aaa79f;font-size:14px}.navlinks a:hover{color:#fff}.navbtn{padding:11px 17px;border:1px solid #3b3935;border-radius:9px;font-size:13px;background:#151513}
-.hero{min-height:720px;padding:80px 5vw 70px;position:relative;display:grid;grid-template-columns:1fr 1.08fr;gap:6vw;align-items:center;max-width:1500px;margin:auto}
-.kicker{display:flex;align-items:center;gap:10px;color:#bdb8ae;font-size:12px;letter-spacing:1.5px;text-transform:uppercase}.dot{width:7px;height:7px;background:var(--orange);border-radius:50%;box-shadow:0 0 18px #ff6a21}
-h1{font:800 clamp(48px,6.3vw,92px)/.92 Manrope;letter-spacing:-5px;margin:23px 0}.accent{color:var(--orange)}.lead{max-width:530px;color:#aaa69d;font-size:18px;line-height:1.6}.actions{display:flex;gap:12px;margin-top:32px}.primary{background:var(--orange);color:#111;padding:15px 22px;border-radius:10px;font-weight:700}.secondary{border:1px solid #393732;padding:15px 22px;border-radius:10px;color:#d5d0c8}
-.stage{height:510px;position:relative;perspective:1200px}.editor{position:absolute;inset:30px 0 0 0;border:1px solid #34322e;border-radius:20px;background:#11110f;box-shadow:0 35px 100px #000;transform:rotateY(-7deg) rotateX(3deg);overflow:hidden;transition:transform .18s ease-out}
-.topbar{height:46px;border-bottom:1px solid #2b2925;display:flex;align-items:center;padding:0 15px;gap:7px}.traffic{width:8px;height:8px;border-radius:50%;background:#555}.file{margin-left:auto;color:#77736c;font-size:11px}.preview{height:285px;margin:14px;border-radius:13px;overflow:hidden;position:relative;background:linear-gradient(130deg,#302b26,#6a4b36 42%,#161412 43%,#24211d 100%)}
-.preview:before{content:"";position:absolute;width:190px;height:260px;right:15%;top:-20px;background:#171614;transform:skew(-13deg);box-shadow:0 0 80px #080808}.person{position:absolute;width:100px;height:190px;right:28%;bottom:0;background:#27231f;border-radius:48% 48% 5% 5%;filter:drop-shadow(0 12px 15px #000)}.scan{position:absolute;left:0;right:0;height:2px;top:45%;background:var(--orange);box-shadow:0 0 20px var(--orange);animation:scan 2.8s ease-in-out infinite}.caption{position:absolute;bottom:18px;left:20px;font:700 23px Manrope}.tag{position:absolute;top:14px;left:14px;background:#0c0c0bca;border:1px solid #555047;padding:7px 10px;border-radius:7px;font-size:10px;letter-spacing:1px}
-.timeline{margin:0 14px}.track{height:46px;margin-top:7px;display:flex;gap:3px}.seg{height:100%;flex:1;background:#25231f;border-radius:3px;position:relative}.seg.hot{background:#4a2819;outline:1px solid #a95020}.seg.hot:after{content:"";position:absolute;left:45%;top:-5px;bottom:-5px;width:2px;background:var(--orange)}.time{display:flex;justify-content:space-between;color:#605c55;font-size:9px;margin-top:5px}
-.float{position:absolute;border:1px solid #3b3934;background:#151512e8;backdrop-filter:blur(10px);border-radius:12px;padding:12px 14px;box-shadow:0 20px 50px #000;font-size:11px}.float strong{display:block;font:700 17px Manrope;margin-top:3px}.f1{top:20px;right:-20px}.f2{bottom:45px;left:-30px}.f3{right:-38px;bottom:120px;color:#d8d2c9}.orange{color:var(--orange)}
-.ticker{border-top:1px solid #272521;border-bottom:1px solid #272521;overflow:hidden;white-space:nowrap;padding:16px 0;color:#77736b;font:600 12px Manrope;letter-spacing:2px}.ticker span{display:inline-block;margin-right:65px}.ticker b{color:var(--orange)}
-.section{padding:125px 5vw;max-width:1500px;margin:auto}.eyebrow{color:var(--orange);font-size:11px;text-transform:uppercase;letter-spacing:2px}.section h2{font:800 clamp(38px,5vw,68px)/1 Manrope;letter-spacing:-3px;max-width:800px;margin:15px 0 55px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{border:1px solid #2b2925;border-radius:18px;padding:30px;min-height:280px;background:#10100e;position:relative;overflow:hidden}.card:after{content:"";position:absolute;width:160px;height:160px;border:1px solid #322f29;border-radius:50%;right:-70px;bottom:-70px}.num{font:700 12px Manrope;color:#666158}.card h3{font:700 25px Manrope;margin-top:70px}.card p{color:#88847c;line-height:1.55}.showcase{background:var(--paper);color:#111;border-radius:28px;padding:55px;display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:center}.showcase h2{margin-bottom:15px}.showcase p{color:#68645d}.mini-editor{border:1px solid #c9c3b9;border-radius:15px;background:#e7e2d8;padding:12px;box-shadow:0 25px 50px #0002}.mini-screen{height:240px;border-radius:10px;background:linear-gradient(125deg,#27231f,#ad7955,#201c18);position:relative;overflow:hidden}.mini-screen:after{content:"";position:absolute;left:16%;right:16%;bottom:20px;height:3px;background:#fff;box-shadow:0 0 0 5px #1116}.mini-lines{display:flex;gap:5px;margin-top:9px}.mini-lines i{height:30px;flex:1;background:#c1b9ad;border-radius:3px}.mini-lines i:nth-child(2){background:#e77835}.cta{padding:140px 5vw;text-align:center;border-top:1px solid #262521}.cta h2{font:800 clamp(45px,7vw,90px)/.92 Manrope;letter-spacing:-5px;margin:18px auto 35px;max-width:950px}.footer{padding:28px 5vw;color:#66625b;border-top:1px solid #24231f;display:flex;justify-content:space-between;font-size:12px}
-@keyframes scan{0%,100%{top:25%;opacity:.3}50%{top:76%;opacity:1}}@media(max-width:850px){.navlinks{display:none}.hero{grid-template-columns:1fr;padding-top:55px}.stage{height:420px}.editor{transform:none}.f1{right:0}.f2{left:0}.f3{right:0}.grid{grid-template-columns:1fr}.showcase{grid-template-columns:1fr;padding:30px}.section{padding:90px 5vw}h1{letter-spacing:-3px}.footer{display:block;line-height:2.2}}
-body{background-image:radial-gradient(circle at 70% 25%,rgba(255,106,33,.055),transparent 22%),radial-gradient(circle at 20% 70%,rgba(255,150,80,.035),transparent 20%);background-attachment:fixed}body:before{content:"";position:fixed;inset:-20%;pointer-events:none;z-index:-1;background:linear-gradient(110deg,transparent 35%,rgba(255,106,33,.035) 45%,transparent 55%);animation:ambientSweep 12s ease-in-out infinite}.hero{overflow:visible}.hero>div:first-child{animation:heroIn .9s cubic-bezier(.2,.8,.2,1) both}.stage{animation:stageIn 1.1s cubic-bezier(.16,1,.3,1) .08s both}.editor{animation:editorFloat 6s ease-in-out infinite}.float{animation:floatBob 4.5s ease-in-out infinite}.f1{animation-delay:-.8s}.f2{animation-delay:-2.1s}.f3{animation-delay:-3.2s}.kicker .dot{animation:pulseDot 2s ease-in-out infinite}.ticker span{animation:tickerDrift 18s linear infinite}.card{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1),border-color .3s ease,background .3s ease}.card.visible{opacity:1;transform:translateY(0)}.card:nth-child(2){transition-delay:.09s}.card:nth-child(3){transition-delay:.18s}.card:hover{transform:translateY(-8px);border-color:#51453b;background:#141310}.card h3{transition:transform .3s ease}.card:hover h3{transform:translateX(3px)}.section>.eyebrow,.section>h2,.showcase{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}.in-view{opacity:1!important;transform:none!important}.preview{animation:previewBreath 7s ease-in-out infinite}.scan{animation:scan 2.8s ease-in-out infinite,scanGlow 1.3s ease-in-out infinite}.seg.hot{animation:hotPulse 1.8s ease-in-out infinite}.seg.hot:nth-child(5){animation-delay:.3s}.seg.hot:nth-child(7){animation-delay:.6s}.mini-editor{transform:translateY(0) rotateX(0);transition:transform .8s cubic-bezier(.2,.8,.2,1),box-shadow .8s ease}.mini-editor:hover{transform:translateY(-8px) rotateX(2deg);box-shadow:0 35px 60px #0003}.mini-screen{animation:miniShift 8s ease-in-out infinite}.primary{position:relative;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}.primary:after{content:"";position:absolute;top:-120%;left:-35%;width:22%;height:340%;background:rgba(255,255,255,.35);transform:rotate(18deg);animation:buttonSheen 4s ease-in-out infinite}.primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(255,106,33,.18)}.navbtn{transition:border-color .2s,transform .2s}.navbtn:hover{transform:translateY(-2px);border-color:#665e54}
-@keyframes heroIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}@keyframes stageIn{from{opacity:0;transform:translateX(40px) scale(.96)}to{opacity:1;transform:none}}@keyframes editorFloat{0%,100%{transform:rotateY(-7deg) rotateX(3deg) translateY(0)}50%{transform:rotateY(-5deg) rotateX(2deg) translateY(-8px)}}@keyframes floatBob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(.5deg)}}@keyframes pulseDot{0%,100%{box-shadow:0 0 10px rgba(255,106,33,.35);transform:scale(1)}50%{box-shadow:0 0 24px rgba(255,106,33,.8);transform:scale(1.2)}}@keyframes tickerDrift{from{transform:translateX(0)}to{transform:translateX(-12px)}}@keyframes ambientSweep{0%,100%{transform:translateX(-12%)}50%{transform:translateX(12%)}}@keyframes previewBreath{0%,100%{filter:saturate(.92) contrast(1)}50%{filter:saturate(1.08) contrast(1.03)}}@keyframes scanGlow{0%,100%{box-shadow:0 0 10px var(--orange)}50%{box-shadow:0 0 28px var(--orange)}}@keyframes hotPulse{0%,100%{box-shadow:inset 0 0 0 rgba(255,106,33,0)}50%{box-shadow:inset 0 0 22px rgba(255,106,33,.08)}}@keyframes miniShift{0%,100%{filter:saturate(.95)}50%{filter:saturate(1.12)}}@keyframes buttonSheen{0%,65%{left:-35%;opacity:0}72%{opacity:1}92%{left:125%;opacity:0}100%{left:125%;opacity:0}}@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}@media(max-width:850px){.editor{animation:editorFloatMobile 6s ease-in-out infinite}@keyframes editorFloatMobile{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ReelScribe — AI Viral Clip Generator</title>
+<meta name="description" content="Turn long YouTube videos into 5–12 ready-to-post viral clips with ReelScribe AI. Start free.">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/favicon.png">
+<link rel="canonical" href="https://reelscribe.site/">
+
+<!-- Open Graph / Social Sharing -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ReelScribe">
+<meta property="og:title" content="ReelScribe — AI Viral Clip Generator">
+<meta property="og:description" content="Turn long YouTube videos into 5–12 ready-to-post viral clips with ReelScribe AI. Start free.">
+<meta property="og:url" content="https://reelscribe.site/">
+<meta property="og:image" content="https://reelscribe.site/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ReelScribe — AI Viral Clip Generator">
+<meta name="twitter:description" content="Turn long YouTube videos into 5–12 ready-to-post viral clips with ReelScribe AI. Start free.">
+<meta name="twitter:image" content="https://reelscribe.site/assets/og-cover.png">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ReelScribe",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Web",
+  "description": "AI-powered viral clip generator that turns long YouTube videos into ready-to-post short clips.",
+  "offers": {
+    "@type": "Offer",
+    "price": "149",
+    "priceCurrency": "INR"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/assets/css/index.css">
+<link rel="stylesheet" href="/premium.css">
 </head>
 <body>
-<nav class="nav"><div class="logo">Reel<span>Scribe</span><i>●</i></div><div class="navlinks"><a href="#how">How it works</a><a href="#features">Features</a><a href="#showcase">Preview</a><a href="/pricing.html">Pricing</a></div><a class="navbtn" href="/clips-dashboard.html">Start creating</a></nav>
-<main>
-<section class="hero"><div><div class="kicker"><span class="dot"></span>Long-form → short-form</div><h1>Make the <span class="accent">moment</span> matter.</h1><p class="lead">Turn your long videos into sharp, ready-to-publish short clips. ReelScribe finds the moments worth watching and cuts them for you.</p><div class="actions"><a class="primary" href="/clips-dashboard.html">Try ReelScribe →</a><a class="secondary" href="#showcase">See how it works</a></div></div>
-<div class="stage" id="stage"><div class="editor" id="editor"><div class="topbar"><i class="traffic"></i><i class="traffic"></i><i class="traffic"></i><span class="file">PODCAST_EP_014 • 01:24:18</span></div><div class="preview"><div class="tag">ANALYSING VIDEO</div><div class="person"></div><div class="scan"></div><div class="caption">“That changed everything.”</div></div><div class="timeline"><div class="track"><i class="seg"></i><i class="seg"></i><i class="seg hot"></i><i class="seg"></i><i class="seg hot"></i><i class="seg"></i><i class="seg hot"></i></div><div class="time"><span>00:00</span><span>24:00</span><span>48:00</span><span>01:12:00</span><span>01:24:18</span></div></div></div><div class="float f1">MOMENTS FOUND<strong class="orange">12 clips</strong></div><div class="float f2">BEST MOMENT<strong>00:47:32</strong></div><div class="float f3">FORMAT <span class="orange">9:16</span> • READY</div></div></section>
-<div class="ticker"><span>VIDEO IN <b>→</b> MOMENTS OUT</span><span>NO TIMELINE WORK</span><span>BUILT FOR CREATORS</span><span>VIDEO IN <b>→</b> MOMENTS OUT</span></div>
-<section class="section" id="how"><div class="eyebrow">01 / The workflow</div><h2>From one long video to a stack of short stories.</h2><div class="grid"><article class="card"><div class="num">01</div><h3>Drop the video.</h3><p>Upload your long-form recording and leave the timeline alone.</p></article><article class="card"><div class="num">02</div><h3>Find the moments.</h3><p>ReelScribe scans the conversation and surfaces sections with real punch.</p></article><article class="card"><div class="num">03</div><h3>Publish the clips.</h3><p>Get vertical, polished cuts ready for Shorts, Reels and TikTok.</p></article></div></section>
-<section class="section" id="features"><div class="eyebrow">02 / Made for the edit</div><h2>Less trimming. More creating.</h2><div class="grid"><article class="card"><div class="num">A</div><h3>Smart cuts</h3><p>Skip the endless scrubbing. Focus on the clips that actually have something to say.</p></article><article class="card"><div class="num">B</div><h3>Vertical by default</h3><p>Every selected moment is composed for the vertical screen instead of being awkwardly cropped.</p></article><article class="card"><div class="num">C</div><h3>Creator-ready</h3><p>Move from raw footage to a clean batch of short-form ideas in minutes.</p></article></div></section>
-<section class="section" id="showcase"><div class="showcase"><div><div class="eyebrow">03 / Inside ReelScribe</div><h2>See the cut before you export.</h2><p>A clean workspace keeps the original video, selected moments and short-form output in one place.</p><a class="primary" href="/clips-dashboard.html">Open the demo →</a></div><div class="mini-editor"><div class="mini-screen"></div><div class="mini-lines"><i></i><i></i><i></i><i></i><i></i></div></div></div></section>
-<section class="cta" id="start"><div class="eyebrow">Ready when you are</div><h2>Your next short is already in your long video.</h2><a class="primary" href="/clips-dashboard.html">Start creating →</a></section>
-</main><footer class="footer"><span>© 2026 ReelScribe</span><span>Built for people who make videos.</span></footer>
-<script>
-const stage=document.getElementById('stage'),editor=document.getElementById('editor');
-stage.addEventListener('pointermove',e=>{const r=stage.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;editor.style.transform=`rotateY(${-7+x*10}deg) rotateX(${3-y*7}deg) translateZ(8px)`});
-stage.addEventListener('pointerleave',()=>editor.style.transform='rotateY(-7deg) rotateX(3deg)');
-const revealEls=[...document.querySelectorAll('.card,.section>.eyebrow,.section>h2,.showcase')];
-const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add(entry.target.classList.contains('card')?'visible':'in-view');io.unobserve(entry.target)}}),{threshold:.14});
-revealEls.forEach(el=>io.observe(el));
-const hotSegments=[...document.querySelectorAll('.seg.hot')];let pulseIndex=0;setInterval(()=>{hotSegments.forEach((el,i)=>el.style.transform=i===pulseIndex?'scaleY(1.08)':'scaleY(1)');pulseIndex=(pulseIndex+1)%hotSegments.length},900);
-</script></body></html>
+<div class="ambient-orb orb-one"></div>
+<div class="ambient-orb orb-two"></div>
+<div class="ambient-orb orb-three"></div>
+<div class="noise-layer"></div>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo"><span class="mark"></span>ReelScribe</div>
+  <div class="nav-toggle">
+    <a class="nav-btn" id="btnT" href="/transcript.html">Transcript</a>
+    <a class="nav-btn active" id="btnC" href="/">Cut Clips</a>
+  </div>
+<a class="rs-referral-link" href="/referral.html">🎁 <span class="rs-full">Invite &amp; </span>Earn</a>
+  <button class="nav-menu" onclick="openMenu()" aria-label="Open menu">≡</button>
+</nav>
+
+<!-- MENU -->
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-box" id="menuBox">
+    <span class="reg tl"></span><span class="reg tr"></span><span class="reg bl"></span><span class="reg br"></span>
+    <div class="menu-top">
+      <div class="nav-logo"><span class="mark"></span>ReelScribe</div>
+      <button class="menu-close" onclick="closeMenu()" aria-label="Close menu">✕</button>
+    </div>
+    <a href="/">Home</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Support</a>
+    <a href="/dashboard.html" id="menuDashTranscript" style="display:none;">Transcription Dashboard</a>
+    <a href="/clips-dashboard.html" id="menuDashClips" style="display:none;">Clips Dashboard</a>
+    <button class="menu-cta" id="menuLoginBtn" onclick="window.location.href='/login.html'">Login →</button>
+    <button class="menu-cta" id="menuLogoutBtn" style="display:none; background:var(--s2); border:1px solid var(--border2); color:var(--text-dim);" onclick="logout()">Logout →</button>
+  </div>
+</div>
+
+<div class="reel ambient-page">
+  <div class="reel-body">
+<div class="hero" data-reveal>
+    <div class="frame-label"><span class="frame-num">—</span><span class="frame-name">AI Powered · Login Required</span><span class="frame-line"></span></div>
+    <h1 class="hero-h1">Turn long videos into <em>viral clips.</em></h1>
+    <p class="hero-sub">Paste any YouTube link. AI scans the transcript, finds the <strong>best viral moments</strong>, and cuts 5–12 ready-to-post reels — automatically.</p>
+
+    <div class="hero-input-wrap">
+      <svg style="width:15px;height:15px;color:var(--muted);margin:auto 0 auto 14px;flex-shrink:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      <input class="hero-input" type="url" id="clipUrl" placeholder="youtube.com/watch?v=...">
+      <button class="hero-input-btn" onclick="generateClips()">Generate</button>
+    </div>
+
+    <div class="trust-pills">
+      <span class="trust-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>YouTube supported</span>
+      <span class="trust-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>5–12 clips per video</span>
+      <span class="trust-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Auto deleted after 24h</span>
+      <span class="trust-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Download then 5min delete</span>
+    </div>
+
+    <div class="demo-video-box">
+      <video autoplay loop muted playsinline preload="metadata">
+        <source src="/assets/videos/demo.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="clips-mockup" aria-hidden="true">
+      <div class="clip-thumb"><span class="clip-dur">0:34</span><span class="clip-cap">WAIT FOR<br>IT</span></div>
+      <div class="clip-thumb"><span class="clip-dur">0:51</span><span class="clip-cap">NOBODY<br>TELLS YOU</span></div>
+      <div class="clip-thumb"><span class="clip-dur">0:22</span><span class="clip-cap">THIS ONE<br>TRICK</span></div>
+    </div>
+
+    <!-- Login wall for guests -->
+    <div id="clipLoginWall">
+      <h3>Login Required</h3>
+      <p>Clip generation is for logged-in users only. Login to generate your viral clips.</p>
+      <button class="clip-login-btn" onclick="window.location.href='/login.html?next=' + encodeURIComponent('/')">Login →</button>
+    </div>
+  </div>
+
+  <div class="ticker-wrap" data-reveal>
+    <div class="ticker">
+      <span class="ticker-item">AI CLIPPING</span><span class="ticker-item"><span>✦</span></span>
+      <span class="ticker-item">5–12 CLIPS PER VIDEO</span><span class="ticker-item"><span>✦</span></span>
+      <span class="ticker-item">YOUTUBE · REELS · SHORTS</span><span class="ticker-item"><span>✦</span></span>
+      <span class="ticker-item">AI BEST MOMENTS</span><span class="ticker-item"><span>✦</span></span>
+      <span class="ticker-item">AUTO DELETE · SECURE</span><span class="ticker-item"><span>✦</span></span>
+      <span class="ticker-item">AI CLIPPING</span><span class="ticker-item"><span>✦</span></span>
+      <span class="ticker-item">5–12 CLIPS PER VIDEO</span><span class="ticker-item"><span>✦</span></span>
+      <span class="ticker-item">AUTO DELETE · SECURE</span><span class="ticker-item"><span>✦</span></span>
+    </div>
+  </div>
+
+  <div class="frame-label"><span class="frame-num">—</span><span class="frame-name">Impact</span><span class="frame-line"></span></div>
+  <div class="stat-strip" data-reveal>
+    <div class="stat-cell"><div class="stat-num">5–12</div><div class="stat-label">Clips Per Video</div></div>
+    <div class="stat-cell"><div class="stat-num">50+</div><div class="stat-label">Languages</div></div>
+    <div class="stat-cell"><div class="stat-num">3</div><div class="stat-label">Guest Previews</div></div>
+    <div class="stat-cell"><div class="stat-num">24h</div><div class="stat-label">Clip Cleanup</div></div>
+    <div class="stat-cell full"><div class="stat-num">₹149/mo</div><div class="stat-label">Starter plan starting price</div></div>
+  </div>
+
+  <!-- Caption Styles -->
+  <div class="frame-label"><span class="frame-num">01</span><span class="frame-name">Included</span><span class="frame-line"></span></div>
+  <h2 class="caption-heading" data-reveal>Caption styles.<br>Built <em>right in.</em></h2>
+  <p class="caption-sub">Burned-in captions for every clip — pick a style and it's done. No editing app needed.</p>
+
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="caption-card"><div class="caption-preview style-red"><span>BOLD POP</span></div><div class="caption-label-bar"><span class="caption-name">Bold Pop</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-red"><span>NEON GLOW</span></div><div class="caption-label-bar"><span class="caption-name">Neon Glow</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-karaoke"><span><span class="filled">KARA</span>OKE</span></div><div class="caption-label-bar"><span class="caption-name">Karaoke</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-outline"><span>OUTLINE</span></div><div class="caption-label-bar"><span class="caption-name">Outline</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-mono"><span>WORD POP</span></div><div class="caption-label-bar"><span class="caption-name">Word Pop</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-classic"><span>CLASSIC</span></div><div class="caption-label-bar"><span class="caption-name">Classic Bold</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-classic"><span>MEME</span></div><div class="caption-label-bar"><span class="caption-name">Meme Impact</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-bounce"><span>BOUNCE</span></div><div class="caption-label-bar"><span class="caption-name">Bounce</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-red"><span>BOLD POP</span></div><div class="caption-label-bar"><span class="caption-name">Bold Pop</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-red"><span>NEON GLOW</span></div><div class="caption-label-bar"><span class="caption-name">Neon Glow</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-karaoke"><span><span class="filled">KARA</span>OKE</span></div><div class="caption-label-bar"><span class="caption-name">Karaoke</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-outline"><span>OUTLINE</span></div><div class="caption-label-bar"><span class="caption-name">Outline</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-mono"><span>WORD POP</span></div><div class="caption-label-bar"><span class="caption-name">Word Pop</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-classic"><span>CLASSIC</span></div><div class="caption-label-bar"><span class="caption-name">Classic Bold</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-classic"><span>MEME</span></div><div class="caption-label-bar"><span class="caption-name">Meme Impact</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-bounce"><span>BOUNCE</span></div><div class="caption-label-bar"><span class="caption-name">Bounce</span></div></div>
+    </div>
+  </div>
+
+  <div class="marquee-wrap">
+    <div class="marquee-track reverse">
+      <div class="caption-card"><div class="caption-preview style-minimal"><span>Minimal Clean</span></div><div class="caption-label-bar"><span class="caption-name">Minimal Clean</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-mono"><span>GRADIENT</span></div><div class="caption-label-bar"><span class="caption-name">Gradient Fill</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-minimal"><span>Cinematic</span></div><div class="caption-label-bar"><span class="caption-name">Cinematic</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-red"><span>RED GLOW</span></div><div class="caption-label-bar"><span class="caption-name">Red Glow</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-boxed"><span>BOXED</span></div><div class="caption-label-bar"><span class="caption-name">Boxed</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-highlight"><span>HIGHLIGHT</span></div><div class="caption-label-bar"><span class="caption-name">Highlight</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-classic"><span>DUOTONE</span></div><div class="caption-label-bar"><span class="caption-name">Duotone</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-shake"><span>SHAKE IT</span></div><div class="caption-label-bar"><span class="caption-name">Shake</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-minimal"><span>Minimal Clean</span></div><div class="caption-label-bar"><span class="caption-name">Minimal Clean</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-mono"><span>GRADIENT</span></div><div class="caption-label-bar"><span class="caption-name">Gradient Fill</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-minimal"><span>Cinematic</span></div><div class="caption-label-bar"><span class="caption-name">Cinematic</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-red"><span>RED GLOW</span></div><div class="caption-label-bar"><span class="caption-name">Red Glow</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-boxed"><span>BOXED</span></div><div class="caption-label-bar"><span class="caption-name">Boxed</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-highlight"><span>HIGHLIGHT</span></div><div class="caption-label-bar"><span class="caption-name">Highlight</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-classic"><span>DUOTONE</span></div><div class="caption-label-bar"><span class="caption-name">Duotone</span></div></div>
+      <div class="caption-card"><div class="caption-preview style-shake"><span>SHAKE IT</span></div><div class="caption-label-bar"><span class="caption-name">Shake</span></div></div>
+    </div>
+  </div>
+
+  <div class="caption-cta">
+    <div class="caption-cta-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+    </div>
+    <div class="caption-cta-text">
+      <h4>Custom caption styles</h4>
+      <p>Pick a style, and it'll be burned into your clips automatically.</p>
+    </div>
+  </div>
+
+  <div class="frame-label"><span class="frame-num">02</span><span class="frame-name">Process</span><span class="frame-line"></span></div>
+  <h2 class="how-heading">How Clip Generation Works</h2>
+  <p class="how-sub">Link to download — three steps.</p>
+  <div class="steps" data-reveal>
+    <div class="step">
+      <div class="step-num-label">01</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+      <h4>Paste YouTube Link</h4>
+      <p>Any public video — podcast, interview, tutorial, vlog.</p>
+    </div>
+    <div class="step">
+      <div class="step-num-label">02</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+      <h4>AI Finds Best Moments</h4>
+      <p>AI reads the full transcript and picks the highest hook-strength, most viral moments.</p>
+    </div>
+    <div class="step">
+      <div class="step-num-label">03</div>
+      <div class="step-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+      <h4>Download Your Clips</h4>
+      <p>5–12 clips ready to download. Main video deleted instantly. Clips auto-delete in 24 hours.</p>
+    </div>
+  </div>
+
+  <div class="frame-label"><span class="frame-num">—</span><span class="frame-name">Pricing</span><span class="frame-line"></span></div>
+  <h2 class="feat-heading">Simple plans.<br>No <em>surprises.</em></h2>
+  <div class="plans-grid" data-reveal>
+    <div class="plan-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">₹149 <span>/month</span></div>
+      <div class="plan-desc">Perfect for trying out AI clipping.</div>
+      <div class="plan-features">
+        <div class="plan-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>30 transcripts/month</div>
+        <div class="plan-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>3–5 clips/video</div>
+        <div class="plan-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>10 videos/month</div>
+      </div>
+      <button class="plan-cta" onclick="window.location.href='/pricing.html'">Get Starter →</button>
+    </div>
+    <div class="plan-card popular">
+      <div class="plan-badge">Most Popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">₹299 <span>/month</span></div>
+      <div class="plan-desc">For regular creators who need more clips.</div>
+      <div class="plan-features">
+        <div class="plan-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>60 transcripts/month</div>
+        <div class="plan-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>5–12 clips/video</div>
+        <div class="plan-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>15 videos/month</div>
+      </div>
+      <button class="plan-cta plan-cta-primary" onclick="window.location.href='/pricing.html'">Get Pro →</button>
+    </div>
+  </div>
+
+  <div class="frame-label"><span class="frame-num">—</span><span class="frame-name">Built For Creators</span><span class="frame-line"></span></div>
+  <div class="testi-grid" data-reveal>
+    <div class="testi-card"><div class="testi-stars">01</div><p class="testi-quote">Transcribe long-form content and search the words that matter.</p><div class="testi-person"><div class="testi-avatar">T</div><div><div class="testi-name">Transcript workflow</div><div class="testi-role">Find ideas faster</div></div></div></div>
+    <div class="testi-card"><div class="testi-stars">02</div><p class="testi-quote">Turn strong moments into vertical clips with styled captions.</p><div class="testi-person"><div class="testi-avatar">C</div><div><div class="testi-name">Clip workflow</div><div class="testi-role">Ready for review</div></div></div></div>
+  </div>
+
+  <div class="frame-label"><span class="frame-num">—</span><span class="frame-name">Why ReelScribe</span><span class="frame-line"></span></div>
+  <table class="compare-table" data-reveal>
+    <thead><tr><th>Feature</th><th class="col-us">ReelScribe</th><th>Others</th></tr></thead>
+    <tbody>
+      <tr><td>Starting price</td><td class="col-us">₹149/mo</td><td>Starter plan</td></tr>
+      <tr><td>Clips per video</td><td class="col-us">5–12</td><td>Depends on plan/source</td></tr>
+      <tr><td>Burned-in captions</td><td class="col-us">Included</td><td>Styled in clip flow</td></tr>
+      <tr><td>Clip cleanup</td><td class="col-us">24h max</td><td>Downloaded clips: 5 min</td></tr>
+    </tbody>
+  </table>
+
+  <div class="frame-label"><span class="frame-num">—</span><span class="frame-name">FAQ</span><span class="frame-line"></span></div>
+  <div class="faq-list" data-reveal>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How many clips do I get per video?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="faq-a"><p>Between 5–12 clips depending on your plan and the length of the source video.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Do I need to log in to generate clips?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="faq-a"><p>Yes — clip generation requires a free account so we can track your monthly quota and keep clips secure.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What happens to my source video after processing?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="faq-a"><p>It's deleted immediately after clips are generated. The clips themselves auto-delete after 24 hours.</p></div>
+    </div>
+  </div>
+
+  <div class="cta-section" data-reveal>
+    <div class="cta-h">Ready to Cut Your First Clips?</div>
+    <p class="cta-p">Start at ₹149/month. No hidden fees.</p>
+    <button class="cta-btn" onclick="window.location.href='/pricing.html'">View Plans & Get Started →</button>
+  </div>
+<footer>
+  <div class="foot-logo"><span class="mark"></span>ReelScribe</div>
+  <div class="foot-tag">transcribe · repurpose · scale</div>
+  <div class="foot-links">
+    <a href="/about.html">About</a>
+    <a href="/pricing.html">Pricing</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/privacy.html">Privacy</a>
+  </div>
+  <div class="foot-copy">© 2026 REELSCRIBE. ALL RIGHTS RESERVED.</div>
+</footer>
+
+  </div>
+</div>
+<div class="sticky-cta" id="stickyCta">
+  <span>AI clips from any YouTube video</span>
+  <button onclick="document.getElementById('clipUrl') ? document.getElementById('clipUrl').focus() : null; window.scrollTo({top:0,behavior:'smooth'})">Try Free</button>
+</div>
+<script src="/assets/js/index.js" defer></script>
+<script src="/assets/js/premium.js" defer></script>
+</body>
+</html>
