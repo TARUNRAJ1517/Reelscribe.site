@@ -105,3 +105,44 @@ function generateClips(){
 
   window.location.href = "/clips-dashboard.html?ytUrl=" + encodeURIComponent(url) + "&autostart=1";
 }
+
+(() => {
+  const revealItems = document.querySelectorAll("[data-reveal]");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    revealItems.forEach(item => observer.observe(item));
+  } else {
+    revealItems.forEach(item => item.classList.add("is-visible"));
+  }
+
+  const hero = document.querySelector(".hero");
+  const demo = document.querySelector(".demo-video-box");
+
+  if (!hero || !demo || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  hero.addEventListener("pointermove", event => {
+    const rect = hero.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+    demo.style.transform =
+      `perspective(1100px) rotateX(${4 - y * 5}deg) rotateY(${x * 7}deg) translateY(-4px)`;
+  });
+
+  hero.addEventListener("pointerleave", () => {
+    demo.style.transform = "perspective(1100px) rotateX(4deg) rotateY(0deg)";
+  });
+})();
